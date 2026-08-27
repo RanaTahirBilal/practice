@@ -8,6 +8,9 @@
 <meta property="og:title" content="Rana Tahir Bilal — Digital identity and authority">
 <meta property="og:description" content="You have built the reputation. I build the place for it to live.">
 <meta property="og:type" content="website">
+<link rel="preload" as="image" href="img/rana-hero-1100.jpg"
+      imagesrcset="img/rana-hero-700.webp 700w, img/rana-hero-1100.webp 1100w"
+      imagesizes="(max-width:1000px) 420px, 44vw" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap">
@@ -57,19 +60,29 @@
     --display:'DM Serif Display',Georgia,'Times New Roman',serif;
     --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
 
-    --t-hero:clamp(52px,7.6vw,112px);
-    --t-statement:clamp(38px,4.8vw,68px);
-    --t-h2:clamp(28px,2.7vw,38px);
-    --t-h3:clamp(21px,1.75vw,25px);
-    --t-lead:clamp(19px,1.55vw,23px);
-    --t-body:clamp(17px,1.15vw,19px);
-    --t-small:17.5px;
-    --t-nav:14.5px;
-    --t-label:13px;
+    /* SEVEN TYPE STEPS, NO MORE. Every size on the page resolves to one of
+       these. A new size is a decision that has to be justified, not a nudge. */
+    --t-hero:clamp(50px,7.2vw,104px);      /* the headline, once            */
+    --t-statement:clamp(34px,4.4vw,62px);  /* section statements            */
+    --t-argument:clamp(24px,2.3vw,34px);   /* the decision, the closing line */
+    --t-lead:clamp(19px,1.5vw,22px);       /* first paragraph of a section  */
+    --t-body:clamp(17px,1.15vw,19px);      /* everything else that is read  */
+    --t-meta:15.5px;                       /* notes beside a thing          */
+    --t-label:13px;                        /* uppercase labels and nav      */
 
-    --measure:58ch;
+    /* ONE SPACING SCALE. Section rhythm is s-6; the distance between two acts
+       is s-7. Nothing on the page invents its own vertical gap. */
+    --s-1:clamp(6px,.5vw,10px);
+    --s-2:clamp(12px,1vw,18px);
+    --s-3:clamp(20px,1.7vw,28px);
+    --s-4:clamp(30px,2.6vw,44px);
+    --s-5:clamp(46px,4vw,68px);
+    --s-6:clamp(68px,6.2vw,104px);
+    --s-7:clamp(96px,8.6vw,152px);
+
     --page:1320px;
     --gutter:clamp(20px,4.5vw,60px);
+    --narrow:76%;   /* the reading column inside a full-width section */
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -87,11 +100,15 @@ body{
    are needed or long strings push the page sideways. */
 img,svg{ max-width:100%; }
 p,li,h1,h2,h3,dd,dt,span{ overflow-wrap:break-word; }
-.page > *,.hero-grid > *,.band > *,.case-grid > *,
+.page > *,.hero-grid > *,.band > *,.case > *,
 .cost-body > *,.who-in > *,.exam-grid > *,
 .contact-in > *{ min-width:0; }
 
 .page{ max-width:var(--page); margin:0 auto; padding:0 var(--gutter); }
+.skip{ position:absolute; left:0; top:0; z-index:9; clip-path:inset(50%); pointer-events:none; background:var(--gold); color:#14100A;
+    font-size:var(--t-label); font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    padding:14px 20px; text-decoration:none; }
+.skip:focus{ clip-path:none; pointer-events:auto; left:var(--gutter); top:12px; }
 a{ color:inherit; }
 a:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 
@@ -106,12 +123,12 @@ a:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 /* ---------- masthead ---------- */
 .top{
     display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
-    padding:26px 0 22px; border-bottom:1px solid var(--rule);
+    padding:var(--s-3) 0 var(--s-2); border-bottom:1px solid var(--rule);
 }
 .wordmark{ font-weight:700; font-size:16px; letter-spacing:.005em; }
 .top nav{ display:flex; gap:4px clamp(16px,2vw,30px); flex-wrap:wrap; }
 .top nav a{
-    text-decoration:none; font-size:var(--t-nav); font-weight:500;
+    text-decoration:none; font-size:var(--t-label); font-weight:500;
     letter-spacing:.1em; text-transform:uppercase; color:var(--ivory-2);
     padding:11px 0; border-bottom:1px solid transparent;
     transition:color .18s ease, border-color .18s ease;
@@ -119,25 +136,32 @@ a:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 .top nav a:hover{ color:var(--gold); border-bottom-color:var(--gold); }
 
 /* ---------- hero: the idea and the person, together ---------- */
-.hero{ padding:clamp(56px,7vw,112px) 0 clamp(72px,8.5vw,132px); }
+.hero{ padding:var(--s-6) 0 var(--s-7); }
 .hero-grid{
     display:grid; grid-template-columns:minmax(0,52fr) minmax(0,48fr);
-    gap:clamp(30px,5vw,76px); align-items:center;
+    gap:var(--s-5); align-items:center;
 }
-@media (max-width:1000px){ .hero-grid{ grid-template-columns:1fr; gap:clamp(32px,6vw,48px); } }
+/* Mobile order is argued, not inherited: headline, the sentence that names
+   the buyer, the single call, then the photograph. The portrait is evidence
+   of a person, and it earns its place after the claim, not before it. */
+@media (max-width:1000px){
+    .hero-grid{ grid-template-columns:1fr; gap:var(--s-4); }
+    .hero-grid > div{ order:1; }
+    .portrait{ order:2; }
+}
 
 h1{
     font-family:var(--display); font-weight:400;
-    font-size:var(--t-hero); line-height:1.03; letter-spacing:-.018em;
-    margin:0 0 clamp(24px,3vw,36px); max-width:13ch; text-wrap:balance;
+    font-size:var(--t-hero); line-height:1.04; letter-spacing:-.018em;
+    margin:0 0 var(--s-3); max-width:13ch; text-wrap:balance;
     color:var(--ivory);
 }
 h1 em{ font-style:italic; color:var(--gold); }
 
 /* The whole proposition in two sentences. Anything more is explanation. */
 .hero-sub{
-    font-size:var(--t-lead); line-height:1.5; color:var(--ivory);
-    max-width:37ch; text-wrap:pretty; margin:0 0 clamp(30px,3.6vw,44px); font-weight:400;
+    font-size:var(--t-lead); line-height:1.55; color:var(--ivory);
+    max-width:38ch; text-wrap:pretty; margin:0 0 var(--s-4); font-weight:400;
 }
 .hero-sub b{ font-weight:600; }
 
@@ -145,13 +169,13 @@ h1 em{ font-style:italic; color:var(--gold); }
 
 .portrait{ margin:0; position:relative; }
 .portrait img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
-@media (max-width:1000px){ .portrait{ max-width:400px; } }
+@media (max-width:1000px){ .portrait{ max-width:420px; } }
 
 /* ---------- thin strip ---------- */
 .band{ display:grid; grid-template-columns:33.33% 33.33% 33.33%; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
-.band div{ padding:18px clamp(16px,1.8vw,26px) 18px 0; border-right:1px solid var(--rule); }
+.band div{ padding:var(--s-3) var(--s-3) var(--s-3) 0; border-right:1px solid var(--rule); }
 .band div:last-child{ border-right:0; padding-right:0; }
-.band dt{ margin:0 0 10px; }
+.band dt{ margin:0 0 var(--s-2); }
 .band dd{ margin:0; font-family:var(--display); font-weight:400; font-size:clamp(18px,1.5vw,21px); line-height:1.32; color:var(--ivory); letter-spacing:-.006em; }
 .band dd i{ font-style:italic; color:var(--ivory); }
 @media (max-width:820px){
@@ -163,19 +187,20 @@ h1 em{ font-style:italic; color:var(--gold); }
 /* ---------- headings ---------- */
 h2{
     font-family:var(--sans); font-weight:600;
-    font-size:var(--t-h2); line-height:1.22; letter-spacing:-.008em; margin:0;
+    font-size:clamp(27px,2.5vw,36px); line-height:1.22; letter-spacing:-.008em; margin:0;
     max-width:22ch; text-wrap:balance; color:var(--ivory);
 }
 /* The serif is reserved for the statements. That reservation is what makes
    them read as statements rather than headings. */
 h2.statement{
     font-family:var(--display); font-weight:400;
-    font-size:var(--t-statement); line-height:1.08; letter-spacing:-.018em;
-    max-width:17ch;
+    font-size:var(--t-statement); line-height:1.1; letter-spacing:-.018em;
+    max-width:18ch;
 }
-h3{ font-family:var(--sans); font-weight:600; font-size:var(--t-h3); line-height:1.3; letter-spacing:-.004em; margin:0 0 10px; color:var(--ivory); }
-.section-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin:0 0 clamp(30px,4vw,52px); }
-.section-head p{ margin:0; color:var(--ivory-2); font-size:var(--t-body); max-width:34ch; }
+h3{ font-family:var(--sans); font-weight:600; font-size:var(--t-lead); line-height:1.3; letter-spacing:-.004em; margin:0 0 var(--s-1); color:var(--ivory); }
+.section-head{ margin:0 0 var(--s-6); }
+.section-head p{ margin:var(--s-2) 0 0; color:var(--ivory-3); font-size:var(--t-meta);
+    letter-spacing:.14em; text-transform:uppercase; font-weight:600; }
 
 
 
@@ -184,77 +209,87 @@ h3{ font-family:var(--sans); font-weight:600; font-size:var(--t-h3); line-height
    Two movements on one dark ground: what the name returns now,
    and the home that gives it somewhere to point.
    ========================================================== */
-.chapter{ padding:clamp(68px,8vw,120px) 0 clamp(64px,7.5vw,112px); }
+.chapter{ padding:var(--s-7) 0 var(--s-7); }
 /* A conceptual shift needs more air than a paragraph break. Each movement is
    one thought; the distance between them is what makes that legible. */
-.movement{ margin:0 0 clamp(76px,9vw,148px); }
+.movement{ margin:0 0 var(--s-7); }
 .movement:last-of-type{ margin:0; }
-.mvt-head{ display:block; margin:0 0 clamp(24px,3vw,40px); }
-.mvt-head .label{ display:block; margin:0 0 18px; }
+.mvt-head{ display:block; margin:0 0 var(--s-5); }
+.mvt-head .label{ display:block; margin:0 0 var(--s-2); }
 .mvt-head .label{ flex:none; }
-.mvt-head h2.statement{ max-width:19ch; font-size:clamp(42px,5.4vw,80px); }
+.mvt-head h2.statement{ max-width:19ch; }
 
 .query{
-    max-width:90%;
-    display:flex; align-items:center; gap:14px;
-    border:1px solid var(--rule-night); padding:clamp(16px,1.8vw,22px) clamp(18px,2vw,26px);
-    background:var(--night-raise); margin:0 0 clamp(26px,3vw,40px);
+    max-width:min(680px,100%);
+    display:flex; align-items:center; gap:var(--s-2);
+    border:1px solid var(--rule-night); padding:var(--s-3) var(--s-3);
+    background:var(--night-raise); margin:0 0 var(--s-5);
 }
 .query svg{ flex:none; }
-.query span{ font-size:clamp(21px,2.2vw,34px); color:var(--ivory); letter-spacing:.01em; }
+.query span{ font-size:clamp(20px,2vw,28px); color:var(--ivory); letter-spacing:.01em; }
 .query i{ font-style:normal; color:var(--ivory-3); }
 
-/* Seven sources, scattered, that settle into a column on reveal. The point of
-   the motion is the only point of the section: the parts are all real, they
-   are simply not organised. */
-.fragments{ display:block; max-width:90%; }
-/* Each source sits at its own indent and its own width. Aligned, they would
-   read as a tidy list, which is the opposite of the point: the parts are all
-   real and none of them were written together. */
+/* ----------------------------------------------------------------------
+   THE FRAGMENTS
+   Composed the way a page of results is read - a source line above a line of
+   context, separated by hairlines - without reproducing a results page or
+   implying any real search data. Every entry sits at its own indent and its
+   own width. Aligned, they would read as a tidy list, which is the opposite
+   of the point: each of these is real, and none of them was written with the
+   others in mind. The raggedness is the argument.
+   ---------------------------------------------------------------------- */
+.fragments{ display:block; max-width:min(880px,100%); }
 .frag{
-    border-top:1px solid var(--rule-night); padding:15px 0;
-    display:grid; grid-template-columns:minmax(0,1fr) auto; gap:16px; align-items:baseline;
+    border-top:1px solid var(--rule-night);
+    padding:var(--s-2) 0 calc(var(--s-2) + 2px);
+    display:block; position:relative;
 }
-.frag:nth-child(1){ margin-left:0;   width:62%; }
-.frag:nth-child(2){ margin-left:15%; width:57%; }
-.frag:nth-child(3){ margin-left:5%;  width:70%; }
-.frag:nth-child(4){ margin-left:24%; width:54%; }
-.frag:nth-child(5){ margin-left:9%;  width:65%; }
-.frag:nth-child(6){ margin-left:32%; width:52%; }
-.frag:nth-child(7){ margin-left:3%;  width:60%; }
-.frag:nth-child(8){ margin-left:19%; width:56%; }
+.frag:last-child{ border-bottom:1px solid var(--rule-night); }
+.frag b{
+    display:block; font-size:clamp(19px,1.5vw,22px); font-weight:500;
+    color:var(--ivory-2); line-height:1.3; letter-spacing:-.004em;
+}
+.frag span{
+    display:block; margin:6px 0 0; font-size:var(--t-meta);
+    color:var(--ivory-3); line-height:1.5;
+}
+.frag:nth-child(1){ margin-left:0;   width:64%; }
+.frag:nth-child(2){ margin-left:14%; width:60%; }
+.frag:nth-child(3){ margin-left:5%;  width:72%; }
+.frag:nth-child(4){ margin-left:22%; width:57%; }
+.frag:nth-child(5){ margin-left:9%;  width:66%; }
+.frag:nth-child(6){ margin-left:30%; width:55%; }
+.frag:nth-child(7){ margin-left:3%;  width:62%; }
+.frag:nth-child(8){ margin-left:18%; width:58%; }
 @media (max-width:820px){
     .frag:nth-child(n){ margin-left:0; width:100%; }
-    .frag:last-child{ border-bottom:1px solid var(--rule-night); }
 }
-.frag b{ font-size:clamp(18px,1.5vw,22px); font-weight:500; color:var(--ivory-2); line-height:1.35; }
-.frag span{ font-size:15.5px; color:var(--ivory-3); text-align:right; }
 .js-reveal .frag{ opacity:0; transform:translate(var(--dx,0), var(--dy,0)); }
 .js-reveal .fragments.in .frag{
     opacity:1; transform:none;
-    transition:opacity .7s ease, transform .95s cubic-bezier(.2,.72,.24,1);
+    transition:opacity .8s ease, transform 1.05s cubic-bezier(.2,.72,.24,1);
 }
 .js-reveal .fragments.in .frag:nth-child(1){ transition-delay:.02s; }
-.js-reveal .fragments.in .frag:nth-child(2){ transition-delay:.09s; }
-.js-reveal .fragments.in .frag:nth-child(3){ transition-delay:.16s; }
-.js-reveal .fragments.in .frag:nth-child(4){ transition-delay:.23s; }
-.js-reveal .fragments.in .frag:nth-child(5){ transition-delay:.30s; }
-.js-reveal .fragments.in .frag:nth-child(6){ transition-delay:.37s; }
-.js-reveal .fragments.in .frag:nth-child(7){ transition-delay:.44s; }
-.js-reveal .fragments.in .frag:nth-child(8){ transition-delay:.51s; }
-.frag:nth-child(1){ --dx:-46px; --dy:20px; }
-.frag:nth-child(2){ --dx:38px;  --dy:26px; }
-.frag:nth-child(3){ --dx:-30px; --dy:30px; }
-.frag:nth-child(4){ --dx:52px;  --dy:22px; }
-.frag:nth-child(5){ --dx:-40px; --dy:28px; }
-.frag:nth-child(6){ --dx:26px;  --dy:34px; }
-.frag:nth-child(7){ --dx:-52px; --dy:24px; }
-.frag:nth-child(8){ --dx:44px;  --dy:30px; }
+.js-reveal .fragments.in .frag:nth-child(2){ transition-delay:.10s; }
+.js-reveal .fragments.in .frag:nth-child(3){ transition-delay:.18s; }
+.js-reveal .fragments.in .frag:nth-child(4){ transition-delay:.26s; }
+.js-reveal .fragments.in .frag:nth-child(5){ transition-delay:.34s; }
+.js-reveal .fragments.in .frag:nth-child(6){ transition-delay:.42s; }
+.js-reveal .fragments.in .frag:nth-child(7){ transition-delay:.50s; }
+.js-reveal .fragments.in .frag:nth-child(8){ transition-delay:.58s; }
+.frag:nth-child(1){ --dx:-40px; --dy:16px; }
+.frag:nth-child(2){ --dx:32px;  --dy:20px; }
+.frag:nth-child(3){ --dx:-26px; --dy:24px; }
+.frag:nth-child(4){ --dx:44px;  --dy:18px; }
+.frag:nth-child(5){ --dx:-34px; --dy:22px; }
+.frag:nth-child(6){ --dx:22px;  --dy:28px; }
+.frag:nth-child(7){ --dx:-44px; --dy:20px; }
+.frag:nth-child(8){ --dx:36px;  --dy:24px; }
 @media (prefers-reduced-motion: reduce){
     .js-reveal .frag{ opacity:1; transform:none; }
     .js-reveal .fragments.in .frag{ transition:none; }
 }
-.mvt-note{ font-size:clamp(18px,1.5vw,22px); color:var(--ivory-2); margin:clamp(22px,2.6vw,34px) 0 0; line-height:1.5; max-width:44ch; }
+.mvt-note{ font-size:var(--t-lead); color:var(--ivory-2); margin:var(--s-5) 0 0; line-height:1.55; max-width:50ch; }
 .mvt-note b{ color:var(--ivory); font-weight:600; }
 
 /* ---------- the consequence ----------
@@ -262,50 +297,92 @@ h3{ font-family:var(--sans); font-weight:600; font-size:var(--t-h3); line-height
    Two columns of prose under one statement, closing on a single serif line
    that names the cost. Nothing here is a claim about results. */
 .cost-body{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:clamp(26px,4vw,72px); align-items:start;
-    margin:clamp(26px,3.4vw,44px) 0 0; }
-@media (max-width:900px){ .cost-body{ grid-template-columns:1fr; gap:22px; } }
+    gap:var(--s-5); align-items:start; margin:0; max-width:var(--narrow); }
+@media (max-width:1100px){ .cost-body{ max-width:100%; } }
+@media (max-width:900px){ .cost-body{ grid-template-columns:1fr; gap:var(--s-3); } }
 .cost-body > *{ min-width:0; }
-.cost-body p{ margin:0 0 clamp(16px,1.8vw,22px); font-size:clamp(17.5px,1.3vw,20px);
-    line-height:1.62; color:var(--ivory-2); max-width:50ch; }
+.cost-body p{ margin:0 0 var(--s-3); font-size:var(--t-body);
+    line-height:1.68; color:var(--ivory-2); max-width:52ch; }
 .cost-body p:last-child{ margin-bottom:0; }
 .cost-body b{ color:var(--ivory); font-weight:600; }
 .cost-close{
-    margin:clamp(40px,4.6vw,68px) 0 0; padding:clamp(30px,3.4vw,46px) 0 0;
+    margin:var(--s-6) 0 0; padding:var(--s-5) 0 0;
     border-top:1px solid var(--rule-night);
     font-family:var(--display); font-weight:400;
-    font-size:clamp(26px,2.9vw,42px); line-height:1.2; letter-spacing:-.014em;
-    color:var(--ivory); max-width:34ch;
+    font-size:clamp(26px,2.8vw,40px); line-height:1.22; letter-spacing:-.014em;
+    color:var(--ivory); max-width:32ch;
 }
 .cost-close i{ font-style:italic; color:var(--gold); }
 
-/* The home. One gold-bordered object, and the only one on the page. */
-/* The destination drawn as a single structure: one centre that everything
-   else points at. Six satellites, hairline connectors, no cards. Above it the
-   seven sources sit at seven different indents and none of them line up —
-   that contrast is the entire argument, made in layout rather than stated. */
-.home{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin:clamp(28px,4vw,56px) 0 0; }
+/* ----------------------------------------------------------------------
+   THE DIGITAL HOME
+   The destination drawn as one structure: a centre, six sources, and a
+   hairline from each source to the centre. The lines draw in on entry, in
+   sequence, so the reader watches six separate things acquire one place to
+   point at. No glow, no nodes, no icons - the connection IS the explanation.
+   ---------------------------------------------------------------------- */
+.home{
+    display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+    margin:var(--s-5) 0 0; align-items:stretch;
+}
 .node{
-    padding:clamp(16px,2vw,26px) clamp(14px,1.6vw,22px);
-    border-top:1px solid var(--rule-night); text-align:center;
+    position:relative; text-align:center;
+    padding:var(--s-2) var(--s-2);
     font-size:var(--t-label); font-weight:600; letter-spacing:.17em;
     text-transform:uppercase; color:var(--ivory-3);
+    display:flex; align-items:center; justify-content:center;
 }
+/* The connector. A single hairline that grows out of the label towards the
+   centre band. transform-origin decides which end it grows from. */
+.node::after{
+    content:''; position:absolute; left:50%; width:1px;
+    background:var(--rule-night);
+}
+.node--top{ padding-bottom:calc(var(--s-5) + var(--s-2)); }
+.node--bot{ padding-top:calc(var(--s-5) + var(--s-2)); }
+.node--top::after{ bottom:0; height:var(--s-5); transform-origin:50% 0; }
+.node--bot::after{ top:0;    height:var(--s-5); transform-origin:50% 100%; }
+
+.js-reveal .node::after{ transform:scaleY(0); }
+.js-reveal .home.in .node::after{
+    transform:scaleY(1);
+    transition:transform .9s cubic-bezier(.22,.68,.24,1);
+}
+.js-reveal .home.in .node:nth-child(1)::after{ transition-delay:.45s; }
+.js-reveal .home.in .node:nth-child(2)::after{ transition-delay:.57s; }
+.js-reveal .home.in .node:nth-child(3)::after{ transition-delay:.69s; }
+.js-reveal .home.in .node:nth-child(5)::after{ transition-delay:.81s; }
+.js-reveal .home.in .node:nth-child(6)::after{ transition-delay:.93s; }
+.js-reveal .home.in .node:nth-child(7)::after{ transition-delay:1.05s; }
+@media (prefers-reduced-motion: reduce){
+    .js-reveal .node::after{ transform:none; }
+    .js-reveal .home.in .node::after{ transition:none; }
+}
+
 .hub{
     grid-column:1 / -1; border-top:1px solid var(--gold); border-bottom:1px solid var(--gold);
-    padding:clamp(34px,4.5vw,66px) 20px; text-align:center; background:var(--night-raise);
+    padding:var(--s-6) var(--s-3); text-align:center; background:var(--night-raise);
 }
 .hub b{
     display:block; font-family:var(--display); font-weight:400;
-    font-size:clamp(38px,5.4vw,82px); line-height:1; letter-spacing:-.022em; color:var(--ivory);
+    font-size:clamp(36px,5vw,76px); line-height:1; letter-spacing:-.022em; color:var(--ivory);
 }
 .hub span{
-    display:block; margin:16px 0 0; font-size:var(--t-label); font-weight:600;
+    display:block; margin:var(--s-2) 0 0; font-size:var(--t-label); font-weight:600;
     letter-spacing:.17em; text-transform:uppercase; color:var(--gold);
 }
-@media (max-width:700px){
-    .home{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+/* Below 600px three uppercase labels across cannot hold their tracking, so the
+   structure becomes a vertical spine: six sources reading down through one
+   centre. The argument survives the change of axis. */
+@media (max-width:600px){
+    .home{ grid-template-columns:1fr; }
+    .node{ padding-left:0; padding-right:0; }
+    .node--top{ padding-bottom:var(--s-4); }
+    .node--bot{ padding-top:var(--s-4); }
+    .node--top::after{ height:calc(var(--s-4) - 6px); }
+    .node--bot::after{ height:calc(var(--s-4) - 6px); }
     .hub b{ font-size:clamp(34px,10vw,52px); }
+    .hub{ padding:var(--s-5) var(--s-2); }
 }
 
 p.pull{
@@ -319,130 +396,155 @@ p.pull i{ font-style:italic; color:var(--ivory); }
 
 
 
-/* ---------- work: three people, then an index ---------- */
-/* The bottom padding was sized for a twelve-name strip that no longer
-   exists. With the third case study now ending the section, the act
-   boundary itself supplies the break. */
-.work{ padding:clamp(56px,6.5vw,96px) 0 clamp(40px,4.5vw,64px); }
+/* ----------------------------------------------------------------------
+   SELECTED ENGAGEMENTS
+   Read in the order a person is understood: the name, what they do, that
+   they asked for this, the thing that was built, the judgement behind it,
+   and the reasoning under that. The screenshot proves the work exists and
+   takes a little over half the column. The decision is set in the display
+   serif at argument scale, so the judgement still outweighs the evidence
+   without being placed above it.
+   ---------------------------------------------------------------------- */
+.work{ padding:var(--s-7) 0; }
 
-.case{ margin:0 0 clamp(66px,7.5vw,116px); }
+/* Cases are siblings inside one argument, not separate acts, so they get
+   section rhythm rather than act rhythm. */
+.case{ margin:0 0 var(--s-6); }
 .case:last-of-type{ margin-bottom:0; }
-/* The screenshot proves the work exists. The reasoning proves I knew what I
-   was doing. So the reasoning takes the wider column and the serif, and the
-   screenshot sits beside it as evidence rather than above it as the subject. */
-.case-grid{ display:grid; grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-    gap:clamp(24px,3.6vw,64px); align-items:start; }
-@media (max-width:900px){ .case-grid{ grid-template-columns:1fr; gap:24px; } }
-.case-grid > *{ min-width:0; }
-/* Naming the relationship is a fact he can stand behind. It sits with the
-   role, not with the reasoning, so it reads as attribution rather than as
-   a claim about what the work achieved. */
-.commissioned{ display:block; font-size:var(--t-label); font-weight:600; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--gold); margin:clamp(16px,2vw,22px) 0 0; }
 
-.name{ font-family:var(--display); font-weight:400; font-size:clamp(26px,2.5vw,36px); line-height:1.14; margin:0 0 8px; letter-spacing:-.012em; color:var(--ivory); }
-.role{ font-size:14px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--ivory-3); margin:0 0 clamp(16px,2vw,24px); line-height:1.4; }
-/* The trio POSITIONING / STRUCTURE / PURPOSE stated claims about the work.
-   This states the reasoning behind it, which is the only proof available
-   when there are no outcomes to publish: observation, decision, execution. */
-.why{ display:block; margin:clamp(16px,2vw,24px) 0 0;
-    border-top:1px solid var(--rule-night); padding-top:clamp(16px,2vw,22px); }
-.why > *{ min-width:0; }
-.why .k{ display:block; margin:0 0 clamp(12px,1.4vw,16px); font-size:var(--t-label);
-    font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ivory-3); }
-/* The decision is set at statement scale, the reasoning under it at body
-   scale. A visitor who reads one line per project should read the judgement,
-   not the justification. */
+.name{ font-family:var(--display); font-weight:400; font-size:clamp(26px,2.4vw,34px);
+    line-height:1.14; margin:0 0 var(--s-1); letter-spacing:-.012em; color:var(--ivory); }
+.role{ font-size:var(--t-label); font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ivory-3); margin:0; line-height:1.5; }
+/* Naming the relationship is a fact he can stand behind. It sits with the
+   role, not with the reasoning, so it reads as attribution rather than as a
+   claim about what the work achieved. */
+.commissioned{ display:block; font-size:var(--t-label); font-weight:600; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--gold); margin:var(--s-1) 0 0; line-height:1.5; }
+
+/* Evidence, not a control. The engagement carries exactly one link out, and
+   it is the labelled one at the end - a screenshot that is also a link gives
+   the reader two doors to the same room and makes the panel feel like a
+   portfolio tile. */
+.case-shot{
+    display:block; width:58%; margin:var(--s-4) 0 0;
+    position:relative; overflow:hidden; background:var(--night-raise);
+    border:1px solid var(--rule-night); aspect-ratio:16/10;
+}
+@media (max-width:900px){ .case-shot{ width:100%; } }
+.case-shot img{ width:100%; height:100%; object-fit:cover; object-position:50% 0; display:block; }
+
+.why{ display:block; margin:var(--s-4) 0 0;
+    border-top:1px solid var(--rule-night); padding-top:var(--s-3); }
+.why .k,.why .k2{ display:block; font-size:var(--t-label); font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--ivory-3); }
+.why .k{ margin:0 0 var(--s-2); }
+.why .k2{ margin:var(--s-4) 0 var(--s-2); }
 .why .decision{ margin:0; font-family:var(--display); font-weight:400;
-    font-size:clamp(27px,2.5vw,36px); line-height:1.18; letter-spacing:-.014em;
-    color:var(--ivory); max-width:24ch; }
-.why .k2{ display:block; margin:22px 0 8px; font-size:14px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ivory-3); }
-.why p{ margin:0; font-size:clamp(16px,1.2vw,18px); line-height:1.6; color:var(--ivory-2); max-width:620px; }
+    font-size:var(--t-argument); line-height:1.2; letter-spacing:-.014em;
+    color:var(--ivory); max-width:30ch; }
+.why p{ margin:0; font-size:var(--t-body); line-height:1.65; color:var(--ivory-2); max-width:62ch; }
+
 .open-site{
-    display:inline-block; margin:clamp(20px,2.4vw,30px) 0 0; text-decoration:none;
+    display:inline-block; margin:var(--s-4) 0 0; text-decoration:none;
     font-size:var(--t-label); font-weight:700; letter-spacing:.16em; text-transform:uppercase;
     color:var(--gold); padding:11px 0; box-shadow:inset 0 -1px 0 var(--rule-night);
-    transition:box-shadow .18s ease;
+    transition:box-shadow .2s ease;
 }
 .open-site:hover{ box-shadow:inset 0 -1px 0 var(--gold); }
 
-.case-shot{ display:block; width:100%; text-decoration:none; position:relative; overflow:hidden; background:var(--night-raise); border:1px solid var(--rule-night); aspect-ratio:16/10; }
-.case-shot img{ width:100%; height:100%; object-fit:cover; object-position:50% 0; display:block; transition:transform .7s cubic-bezier(.2,.7,.25,1); }
-.case-shot:hover img{ transform:scale(1.03); }
-.case-shot:hover{ border-color:var(--gold); }
-@media (prefers-reduced-motion: reduce){ .case-shot img{ transition:none; } .case-shot:hover img{ transform:none; } }
-.visit{
-    position:absolute; right:0; bottom:0; background:var(--gold); color:#14100A;
-    font-size:var(--t-label); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-    padding:10px 15px; transform:translateY(100%); transition:transform .3s cubic-bezier(.2,.7,.25,1);
-}
-.case-shot:hover .visit, .case-shot:focus-visible .visit{ transform:none; }
-@media (prefers-reduced-motion: reduce){ .visit{ transition:none; } }
-@media (hover:none){ .visit{ transform:none; } }
-
-/* The remaining twelve as an index, not a thumbnail wall: at wall size the
-   screenshots stop being evidence and start being wallpaper. */
-
-/* ---------- before I build anything ---------- */
-.examine{ padding:clamp(80px,9.5vw,150px) 0 clamp(80px,9.5vw,150px); }
-.exam-grid{ display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:clamp(30px,4.5vw,76px); align-items:start; }
-@media (max-width:820px){ .exam-grid{ grid-template-columns:1fr; gap:26px; align-items:start; } }
+/* ----------------------------------------------------------------------
+   THE PRIVATE VISIBILITY ASSESSMENT
+   Six questions, numbered, set on a reading column rather than across the
+   full page. No cards: a card would make each question a feature. They are
+   steps in one diagnosis, so they share one rule and one rhythm. The item
+   entering the viewport lifts slightly in colour - enough to move the eye
+   down the list at reading pace, not enough to notice as an effect.
+   ---------------------------------------------------------------------- */
+.examine{ padding:var(--s-7) 0; }
+.exam-wrap{ max-width:var(--narrow); }
+@media (max-width:1100px){ .exam-wrap{ max-width:100%; } }
+.exam-grid{ display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+    gap:var(--s-5); align-items:start; }
+@media (max-width:900px){ .exam-grid{ grid-template-columns:1fr; gap:var(--s-4); } }
 .exam-grid > *{ min-width:0; }
-.exam-grid .label{ display:block; margin:0 0 6px; }
+.exam-grid .label{ display:block; margin:0 0 var(--s-3); }
 .exam-list{ list-style:none; margin:0; padding:0; counter-reset:dx; }
 .exam-list li{
     counter-increment:dx; display:grid; grid-template-columns:auto minmax(0,1fr);
-    gap:clamp(14px,1.8vw,26px); align-items:baseline; padding:11px 0;
-    font-size:clamp(18px,1.45vw,20px); color:var(--ivory-2); line-height:1.4;
+    gap:var(--s-3); align-items:baseline;
+    padding:var(--s-3) 0; border-top:1px solid var(--rule);
+    font-size:clamp(18px,1.4vw,21px); color:var(--ivory-3); line-height:1.4;
+    transition:color .55s ease;
 }
-.exam-note{ margin:clamp(26px,3vw,38px) 0 0; padding:clamp(20px,2.2vw,26px) 0 0;
-    border-top:1px solid var(--rule); font-size:var(--t-body); line-height:1.62;
-    color:var(--ivory-3); max-width:46ch; }
+.exam-list li:last-child{ border-bottom:1px solid var(--rule); }
 .exam-list li::before{
     content:counter(dx,decimal-leading-zero);
-    font-family:var(--display); font-size:clamp(20px,1.7vw,24px); color:var(--gold);
+    font-family:var(--display); font-size:clamp(19px,1.6vw,23px); color:var(--gold);
     font-variant-numeric:tabular-nums; line-height:1;
+    transition:color .55s ease;
 }
+.exam-list li.on{ color:var(--ivory); }
+.exam-list li.on::before{ color:var(--gold-lift); }
+@media (prefers-reduced-motion: reduce){
+    .exam-list li,.exam-list li::before{ transition:none; }
+}
+.exam-note{ margin:var(--s-4) 0 0; font-size:var(--t-body); line-height:1.62;
+    color:var(--ivory-3); max-width:46ch; }
 
 /* ---------- who you would be working with ----------
    Placed after the work on purpose: the visitor should want to know who I am
    only once they have seen how I think. No resume, no credentials, no
    adjectives about myself. How I found the problem, and how I work. */
-.who{ padding:clamp(76px,9vw,140px) 0 clamp(52px,6vw,88px); }
+.who{ padding:var(--s-7) 0 var(--s-6); }
 .who-in{ display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
-    gap:clamp(28px,4.5vw,76px); align-items:start; }
-@media (max-width:900px){ .who-in{ grid-template-columns:1fr; gap:26px; } }
+    gap:var(--s-5); align-items:start; }
+@media (max-width:900px){ .who-in{ grid-template-columns:1fr; gap:var(--s-4); } }
 .who-in > *{ min-width:0; }
 .who h2.statement{ max-width:15ch; }
-.who p{ margin:0 0 clamp(16px,1.8vw,22px); font-size:clamp(17.5px,1.3vw,20px);
-    line-height:1.62; color:var(--ivory-2); max-width:54ch; }
+.who p{ margin:0 0 var(--s-3); font-size:var(--t-body);
+    line-height:1.68; color:var(--ivory-2); max-width:56ch; }
 .who p:last-child{ margin-bottom:0; }
 .who b{ color:var(--ivory); font-weight:600; }
-.who .band{ margin:clamp(46px,5.5vw,80px) 0 0; }
+.who .band{ margin:var(--s-6) 0 0; }
 
 /* ---------- the invitation ---------- */
-.contact{ padding:clamp(76px,9vw,148px) 0 clamp(56px,6.5vw,92px); }
+.contact{ padding:var(--s-7) 0 var(--s-6); }
 .contact-in{ display:block; }
-.contact h2{ max-width:15ch; margin:0 0 clamp(28px,3.4vw,40px); }
-.contact p{ color:var(--ivory-2); font-size:clamp(20px,1.8vw,27px); line-height:1.45; max-width:26ch; margin:0 0 clamp(26px,3vw,36px); font-family:var(--display); }
-.contact .quiet{ font-family:var(--sans); font-size:var(--t-body); line-height:1.62;
-    color:var(--ivory-3); max-width:44ch; margin:0 0 clamp(32px,4vw,44px); }
-.links{ display:flex; flex-wrap:wrap; gap:16px; }
+.contact h2{ max-width:22ch; margin:0 0 var(--s-3); font-size:clamp(36px,4.6vw,66px); }
+/* The invitation closes across the full column rather than hugging the left
+   edge: the sentence that lowers the stakes on the left, the single call on
+   the right, one rule under both. */
+.close-row{ display:grid; grid-template-columns:minmax(0,1fr) auto;
+    gap:var(--s-5); align-items:end;
+    border-top:1px solid var(--rule); margin:var(--s-6) 0 0; padding:var(--s-4) 0 0; }
+@media (max-width:820px){
+    .close-row{ grid-template-columns:1fr; gap:var(--s-4); align-items:start;
+        margin:var(--s-5) 0 0; }
+}
+.contact p{ color:var(--ivory-2); font-size:var(--t-argument); line-height:1.28; max-width:24ch;
+    margin:0 0 var(--s-4); font-family:var(--display); letter-spacing:-.01em; }
+.contact .quiet{ font-family:var(--sans); font-size:var(--t-body); line-height:1.68;
+    color:var(--ivory-3); max-width:56ch; margin:0; letter-spacing:0; }
+.links{ display:flex; flex-wrap:wrap; gap:var(--s-2); }
 
 .btn{
     display:inline-block; text-decoration:none;
     font-family:var(--sans); font-size:15.5px; font-weight:700; letter-spacing:.02em;
-    padding:19px 32px; border:1px solid var(--gold); background:var(--gold); color:#14100A;
-    transition:background .18s ease, color .18s ease, border-color .18s ease;
+    padding:20px 34px; border:1px solid var(--gold); background:var(--gold); color:#14100A;
+    transition:background .2s ease, border-color .2s ease;
 }
+.btn:focus-visible{ outline:2px solid var(--ivory); outline-offset:3px; }
 .btn:hover{ background:var(--gold-lift); border-color:var(--gold-lift); color:#14100A; }
 @media (prefers-reduced-motion: reduce){ .btn{ transition:none; } }
 
-footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; }
+footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
+    display:flex; flex-wrap:wrap; gap:var(--s-2); justify-content:space-between; }
 
 /* ---------- entrance ---------- */
-.js-reveal .rv{ opacity:0; transform:translateY(14px); }
-.js-reveal .rv.in{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.25,1); }
+.js-reveal .rv{ opacity:0; transform:translateY(16px); }
+.js-reveal .rv.in{ opacity:1; transform:none;
+    transition:opacity .85s ease, transform .85s cubic-bezier(.22,.68,.24,1); }
 .js-reveal .rv.late.in{ transition-delay:.42s; }
 @media (prefers-reduced-motion: reduce){
     .js-reveal .rv{ opacity:1; transform:none; }
@@ -452,6 +554,8 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
 </style>
 </head>
 <body>
+
+<a class="skip" href="#search">Skip to content</a>
 
 <div class="act-pine">
   <div class="page">
@@ -481,7 +585,7 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
             <img src="img/rana-hero-1100.jpg"
                  srcset="img/rana-hero-700.jpg 700w, img/rana-hero-1100.jpg 1100w"
                  sizes="(max-width:1000px) 400px, 44vw"
-                 alt="Rana Tahir Bilal" width="1100" height="1375" fetchpriority="high" decoding="async">
+                 alt="Rana Tahir Bilal, photographed at an office window" width="1100" height="1375" fetchpriority="high" decoding="async">
           </picture>
         </figure>
       </div>
@@ -543,13 +647,13 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
           <h2 class="statement">Your name deserves a home.</h2>
         </div>
         <div class="home rv">
-          <span class="node">Career</span>
-          <span class="node">Expertise</span>
-          <span class="node">Work</span>
+          <span class="node node--top">Career</span>
+          <span class="node node--top">Expertise</span>
+          <span class="node node--top">Work</span>
           <div class="hub"><b>Your Name</b><span>Your digital home</span></div>
-          <span class="node">Media</span>
-          <span class="node">Ideas</span>
-          <span class="node">Speaking</span>
+          <span class="node node--bot">Media</span>
+          <span class="node node--bot">Ideas</span>
+          <span class="node node--bot">Speaking</span>
         </div>
         <p class="mvt-note">Not another profile. Not another listing. <b>One place your name resolves to</b>, that the rest of it can point at.</p>
       </div>
@@ -563,6 +667,7 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
 <div class="act-pine">
   <div class="page">
     <section id="approach" class="examine">
+      <div class="exam-wrap">
       <div class="exam-grid">
         <h2 class="statement">I don&rsquo;t start with design.</h2>
         <div>
@@ -578,6 +683,7 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
           <p class="exam-note">Six questions, answered before anything is built. If the answers say you do not need a site, that is the answer.</p>
         </div>
       </div>
+      </div>
     </section>
   </div>
 </div>
@@ -592,66 +698,51 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
       </div>
 
       <article class="case rv">
-        <div class="case-grid">
-          <div>
-            <p class="name">Andrew Charles Cooper</p>
-            <p class="role">Aviation &amp; patent counsel</p>
-            <span class="commissioned">Commissioned by Andrew Charles Cooper</span>
-            <div class="why">
-              <span class="k">The decision</span>
-              <p class="decision">Lead with the rarest thing in his career: he is the lawyer called when the rulebook does not exist yet.</p>
-              <span class="k2">Why I built it this way</span>
-              <p>His public record runs across aviation, patent law and litigation &mdash; three fields most readers treat as unrelated, so each one made the others harder to see.</p>
-            </div>
-            <a class="open-site" href="https://ranatahirbilal.github.io/andrew-cooper/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
-          </div>
-          <a class="case-shot" href="https://ranatahirbilal.github.io/andrew-cooper/" target="_blank" rel="noopener noreferrer">
+        <h3 class="name">Andrew Charles Cooper</h3>
+        <p class="role">Aviation &amp; patent counsel</p>
+        <span class="commissioned">Commissioned by Andrew Charles Cooper</span>
+        <figure class="case-shot">
             <img src="img/cooper-lg.jpg" alt="Personal website built for Andrew Charles Cooper" width="1320" height="825" loading="lazy" decoding="async">
-            <span class="visit">Open the site &#8599;</span>
-          </a>
+          </figure>
+        <div class="why">
+          <span class="k">The decision</span>
+          <p class="decision">Lead with the rarest thing in his career: he is the lawyer called when the rulebook does not exist yet.</p>
+          <span class="k2">Why I built it this way</span>
+          <p>His public record runs across aviation, patent law and litigation &mdash; three fields most readers treat as unrelated, so each one made the others harder to see.</p>
         </div>
+        <a class="open-site" href="https://ranatahirbilal.github.io/andrew-cooper/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
       </article>
 
       <article class="case rv">
-        <div class="case-grid">
-          <div>
-            <p class="name">Kristina M. McGahan</p>
-            <p class="role">RN, BSN &middot; Clinician &amp; author</p>
-            <span class="commissioned">Commissioned by Kristina M. McGahan</span>
-            <div class="why">
-              <span class="k">The decision</span>
-              <p class="decision">Bring practice, authorship and speaking into one professional identity.</p>
-              <span class="k2">Why I built it this way</span>
-              <p>Her practice, her book and her speaking existed in three separate places, so a hospital, a publisher and a conference organiser each reached a different partial version of her.</p>
-            </div>
-            <a class="open-site" href="https://ranatahirbilal.github.io/kristina-mcgahan/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
-          </div>
-          <a class="case-shot" href="https://ranatahirbilal.github.io/kristina-mcgahan/" target="_blank" rel="noopener noreferrer">
+        <h3 class="name">Kristina M. McGahan</h3>
+        <p class="role">RN, BSN &middot; Clinician &amp; author</p>
+        <span class="commissioned">Commissioned by Kristina M. McGahan</span>
+        <figure class="case-shot">
             <img src="img/kristina-lg.jpg" alt="Personal website built for Kristina M. McGahan, RN, BSN" width="1320" height="825" loading="lazy" decoding="async">
-            <span class="visit">Open the site &#8599;</span>
-          </a>
+          </figure>
+        <div class="why">
+          <span class="k">The decision</span>
+          <p class="decision">Bring practice, authorship and speaking into one professional identity.</p>
+          <span class="k2">Why I built it this way</span>
+          <p>Her practice, her book and her speaking existed in three separate places, so a hospital, a publisher and a conference organiser each reached a different partial version of her.</p>
         </div>
+        <a class="open-site" href="https://ranatahirbilal.github.io/kristina-mcgahan/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
       </article>
 
       <article class="case rv">
-        <div class="case-grid">
-          <div>
-            <p class="name">Charles L. Cooper</p>
-            <p class="role">CFP &middot; Financial planner</p>
-            <span class="commissioned">Commissioned by Charles L. Cooper</span>
-            <div class="why">
-              <span class="k">The decision</span>
-              <p class="decision">Make four decades of continuity the story, not a footnote.</p>
-              <span class="k2">Why I built it this way</span>
-              <p>Tenure reads as unremarkable until you set it against an industry where advisers move every few years. The disclosures a regulated adviser has to carry are built into the structure rather than bolted to the end.</p>
-            </div>
-            <a class="open-site" href="https://ranatahirbilal.github.io/charles-cooper/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
-          </div>
-          <a class="case-shot" href="https://ranatahirbilal.github.io/charles-cooper/" target="_blank" rel="noopener noreferrer">
+        <h3 class="name">Charles L. Cooper</h3>
+        <p class="role">CFP &middot; Financial planner</p>
+        <span class="commissioned">Commissioned by Charles L. Cooper</span>
+        <figure class="case-shot">
             <img src="img/charles-lg.jpg" alt="Personal website built for Charles L. Cooper, CFP" width="1320" height="825" loading="lazy" decoding="async">
-            <span class="visit">Open the site &#8599;</span>
-          </a>
+          </figure>
+        <div class="why">
+          <span class="k">The decision</span>
+          <p class="decision">Make four decades of continuity the story, not a footnote.</p>
+          <span class="k2">Why I built it this way</span>
+          <p>Tenure reads as unremarkable until you set it against an industry where advisers move every few years. The disclosures a regulated adviser has to carry are built into the structure rather than bolted to the end.</p>
         </div>
+        <a class="open-site" href="https://ranatahirbilal.github.io/charles-cooper/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
       </article>
 
     </main>
@@ -684,9 +775,11 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
         <div>
           <h2 class="statement">Start by finding out what your name currently says.</h2>
           <p>Before you change anything.</p>
-          <p class="quiet">Tell me the name and I will read it the way a stranger would &mdash; what comes back, what you control, and whether there is anything here worth building. If there is not, I will say so.</p>
-          <div class="links">
-            <a class="btn" href="mailto:tahirbilal16@gmail.com?subject=Private%20Visibility%20Assessment">Request a Private Visibility Assessment</a>
+          <div class="close-row">
+            <p class="quiet">Tell me the name and I will read it the way a stranger would &mdash; what comes back, what you control, and whether there is anything here worth building. If there is not, I will say so.</p>
+            <div class="links">
+              <a class="btn" href="mailto:tahirbilal16@gmail.com?subject=Private%20Visibility%20Assessment">Request a Private Visibility Assessment</a>
+            </div>
           </div>
         </div>
       </div>
@@ -750,6 +843,18 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
   window.setTimeout(function(){
     Array.prototype.forEach.call(document.querySelectorAll('.rv:not(.in)'), function(el){ el.classList.add('in'); });
   }, 1500);
+
+  /* The six questions light as they arrive. A colour shift only - the row
+     never moves, because a list that reflows while you read it is a gimmick.
+     The band is deliberately tall and central so exactly one or two rows are
+     lit at reading pace rather than the whole list at once. */
+  var items = Array.prototype.slice.call(document.querySelectorAll('.exam-list li'));
+  if (items.length) {
+    var lit = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ e.target.classList.toggle('on', e.isIntersecting); });
+    }, { rootMargin:'-38% 0px -38% 0px', threshold:0 });
+    items.forEach(function(el){ lit.observe(el); });
+  }
 })();
 </script>
 </body>
