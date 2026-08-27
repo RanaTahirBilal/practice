@@ -145,12 +145,6 @@ h1 em{ font-style:italic; color:var(--gold); }
 .disciplines li{ font-size:var(--t-label); font-weight:600; letter-spacing:.17em; text-transform:uppercase; color:var(--gold); }
 
 .cta-row{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
-.cta-quiet{
-    font-size:var(--t-nav); font-weight:600; letter-spacing:.02em; text-decoration:none;
-    color:var(--ivory-2); border-bottom:1px solid var(--rule);
-    padding:12px 0; transition:color .18s ease, border-color .18s ease;
-}
-.cta-quiet:hover{ color:var(--gold); border-color:var(--gold); }
 
 .portrait{ margin:0; position:relative; }
 .portrait img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; border:1px solid var(--rule); }
@@ -313,10 +307,13 @@ p.pull i{ font-style:italic; color:var(--ivory); }
 
 
 /* ---------- work: three people, then an index ---------- */
-.work{ padding:clamp(56px,6.5vw,96px) 0 clamp(52px,6vw,88px); }
+/* The bottom padding was sized for a twelve-name strip that no longer
+   exists. With the third case study now ending the section, the act
+   boundary itself supplies the break. */
+.work{ padding:clamp(56px,6.5vw,96px) 0 clamp(40px,4.5vw,64px); }
 
 .case{ margin:0 0 clamp(48px,5.5vw,84px); }
-.case:last-of-type{ margin-bottom:clamp(56px,7vw,96px); }
+.case:last-of-type{ margin-bottom:0; }
 /* The screenshot is the proof, so it gets the full column. The person is named
    above it at statement scale, and the single strategic line sits under it. */
 .case-head{
@@ -355,50 +352,6 @@ p.pull i{ font-style:italic; color:var(--ivory); }
 
 /* The remaining twelve as an index, not a thumbnail wall: at wall size the
    screenshots stop being evidence and start being wallpaper. */
-/* ---------- the other twelve, as a slow crawl ---------- */
-/* Three case studies carry the argument; these twelve carry the range. A
-   still list of names proved nothing a reader would stop for, so the twelve
-   are shown as people. The strip runs edge to edge and moves at roughly one
-   name every five seconds - slow enough to read a name in passing, not a
-   carousel demanding attention. It stops on hover, on keyboard focus, and
-   entirely for anyone who has asked for reduced motion. */
-.more{ border-top:1px solid var(--rule-night); padding-top:clamp(20px,2.4vw,30px); }
-.more .label{ display:block; margin:0 0 clamp(20px,2.4vw,28px); }
-.crawl{
-    width:100vw; margin-left:calc(50% - 50vw);
-    overflow:hidden; padding:4px 0;
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
-            mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
-}
-.crawl-track{ display:flex; width:max-content; animation:crawl 68s linear infinite; }
-.crawl:hover .crawl-track,
-.crawl:focus-within .crawl-track{ animation-play-state:paused; }
-@keyframes crawl{ from{ transform:translate3d(0,0,0); } to{ transform:translate3d(-50%,0,0); } }
-
-.chip{
-    display:flex; align-items:center; gap:16px; text-decoration:none;
-    padding:10px clamp(20px,2.2vw,34px) 10px 0; flex:none;
-    transition:opacity .25s ease;
-}
-.crawl:hover .chip{ opacity:.45; }
-.crawl .chip:hover, .crawl .chip:focus-visible{ opacity:1; }
-.chip img{
-    width:76px; height:76px; border-radius:50%; display:block; flex:none;
-    border:1px solid var(--rule-night);
-}
-.chip-t{ display:block; }
-.chip-t b{ display:block; font-size:17px; font-weight:600; color:var(--ivory); line-height:1.3; white-space:nowrap; }
-/* .chip-t > span, not .chip span: a bare descendant selector also matches the
-   wrapper, which would uppercase the person's name. */
-.chip-t > span{ display:block; font-size:13.5px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--ivory-3); margin-top:5px; white-space:nowrap; }
-.chip:hover .chip-t b, .chip:focus-visible .chip-t b{ color:var(--gold); }
-
-@media (prefers-reduced-motion: reduce){
-    /* No motion at all: the strip becomes something the reader scrolls. */
-    .crawl{ overflow-x:auto; -webkit-mask-image:none; mask-image:none; }
-    .crawl-track{ animation:none; }
-}
-@media (max-width:600px){ .chip img{ width:64px; height:64px; } .chip{ gap:13px; } }
 
 /* ---------- before I build anything ---------- */
 .examine{ padding:clamp(60px,7vw,108px) 0; border-bottom:1px solid var(--rule); }
@@ -435,9 +388,7 @@ p.pull i{ font-style:italic; color:var(--ivory); }
     padding:19px 32px; border:1px solid var(--gold); background:var(--gold); color:#14100A;
     transition:background .18s ease, color .18s ease, border-color .18s ease;
 }
-.btn.ghost{ background:transparent; color:var(--ivory); border-color:var(--rule); }
 .btn:hover{ background:var(--gold-lift); border-color:var(--gold-lift); color:#14100A; }
-.btn.ghost:hover{ background:transparent; border-color:var(--gold); color:var(--gold); }
 @media (prefers-reduced-motion: reduce){ .btn{ transition:none; } }
 
 footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; }
@@ -479,7 +430,6 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
           </ul>
           <div class="cta-row">
             <a class="btn" href="mailto:tahirbilal16@gmail.com?subject=Private%20Visibility%20Assessment">Request a Private Visibility Assessment</a>
-            <a class="cta-quiet" href="#work">See the work</a>
           </div>
         </div>
         <figure class="portrait rv">
@@ -604,7 +554,7 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
     <main id="work" class="work">
       <div class="section-head">
         <h2>Digital identity, built around the person.</h2>
-        <p>Three in full. Each one is a live site, not a mock-up.</p>
+        <p>Three in full.</p>
       </div>
 
       <article class="case">
@@ -652,39 +602,6 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
         <ul class="case-notes"><li><span class="k">Positioning</span><span class="v">Continuity as the differentiator in an industry that churns.</span></li><li><span class="k">Structure</span><span class="v">Four decades of practice, with every required disclosure in place.</span></li><li><span class="k">Purpose</span><span class="v">A compliant home a regulated adviser can point to.</span></li></ul>
       </article>
 
-      <div class="more">
-        <span class="label">Twelve more, all live &#8594;</span>
-        <div class="crawl">
-          <div class="crawl-track">
-          <a class="chip" href="https://ranatahirbilal.github.io/elery-shoemaker/" target="_blank" rel="noopener noreferrer"><img src="img/av/shoemaker.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Elery M. Shoemaker</b><span>Nuclear power executive</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/marinella-chvatal/" target="_blank" rel="noopener noreferrer"><img src="img/av/chvatal.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Marinella A. Chvatal, MEd</b><span>Founder &amp; CEO</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/jared-videll/" target="_blank" rel="noopener noreferrer"><img src="img/av/videll.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Jared Videll, DO</b><span>Cardiologist &middot; Lt. Col., USAR</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/kathleen-werner/" target="_blank" rel="noopener noreferrer"><img src="img/av/werner.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Kathleen M. Werner, JD</b><span>Law firm owner</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/gabriela-torres/" target="_blank" rel="noopener noreferrer"><img src="img/av/torres.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Gabriela Torres</b><span>Foundation executive</span></span></a>
-          <a class="chip" href="https://playful-mousse-00f181.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="img/av/vanfleet.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Dr. David D. Van Fleet</b><span>Professor Emeritus</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/philip-berry/" target="_blank" rel="noopener noreferrer"><img src="img/av/berry.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Philip Berry</b><span>Executive coach</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/ana-ferreira/" target="_blank" rel="noopener noreferrer"><img src="img/av/ana.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Ana Eugenia Ferreira, PhD</b><span>Clinical psychologist</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/frances-iger-laterman/" target="_blank" rel="noopener noreferrer"><img src="img/av/laterman.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Frances Iger Laterman</b><span>Private art dealer</span></span></a>
-          <a class="chip" href="https://illustrious-marshmallow-3491a0.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="img/av/silevitch.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Dr. Adam Silevitch, DMD</b><span>Pediatric dentist</span></span></a>
-          <a class="chip" href="https://unrivaled-monstera-cb7475.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="img/av/boske.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Gregory E. Boske</b><span>Medical transport</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/john-fisher/" target="_blank" rel="noopener noreferrer"><img src="img/av/fisher.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>John W. Fisher</b><span>Poet &amp; composer</span></span></a>
-          <span aria-hidden="true" style="display:contents">
-          <a class="chip" href="https://ranatahirbilal.github.io/elery-shoemaker/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/shoemaker.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Elery M. Shoemaker</b><span>Nuclear power executive</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/marinella-chvatal/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/chvatal.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Marinella A. Chvatal, MEd</b><span>Founder &amp; CEO</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/jared-videll/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/videll.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Jared Videll, DO</b><span>Cardiologist &middot; Lt. Col., USAR</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/kathleen-werner/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/werner.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Kathleen M. Werner, JD</b><span>Law firm owner</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/gabriela-torres/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/torres.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Gabriela Torres</b><span>Foundation executive</span></span></a>
-          <a class="chip" href="https://playful-mousse-00f181.netlify.app/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/vanfleet.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Dr. David D. Van Fleet</b><span>Professor Emeritus</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/philip-berry/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/berry.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Philip Berry</b><span>Executive coach</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/ana-ferreira/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/ana.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Ana Eugenia Ferreira, PhD</b><span>Clinical psychologist</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/frances-iger-laterman/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/laterman.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Frances Iger Laterman</b><span>Private art dealer</span></span></a>
-          <a class="chip" href="https://illustrious-marshmallow-3491a0.netlify.app/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/silevitch.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Dr. Adam Silevitch, DMD</b><span>Pediatric dentist</span></span></a>
-          <a class="chip" href="https://unrivaled-monstera-cb7475.netlify.app/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/boske.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Gregory E. Boske</b><span>Medical transport</span></span></a>
-          <a class="chip" href="https://ranatahirbilal.github.io/john-fisher/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/fisher.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>John W. Fisher</b><span>Poet &amp; composer</span></span></a>
-          </span>
-          </div>
-        </div>
-      </div>
     </main>
   </div>
 </div>
@@ -708,7 +625,6 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
           <p>I&rsquo;d like to understand what you&rsquo;ve built.</p>
           <div class="links">
             <a class="btn" href="mailto:tahirbilal16@gmail.com?subject=Private%20Visibility%20Assessment">Request a Private Visibility Assessment</a>
-            <a class="btn ghost" href="#work">See the work</a>
           </div>
         </div>
         <figure class="fig rv">
