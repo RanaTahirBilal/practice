@@ -824,45 +824,6 @@ p.pull i{ font-style:italic; color:var(--ivory); }
 .strip-note{ margin:var(--s-3) 0 0; font-size:var(--t-label); font-weight:600;
     letter-spacing:.16em; text-transform:uppercase; color:var(--ivory-3); }
 
-/* ----------------------------------------------------------------------
-   THE PRIVATE VISIBILITY ASSESSMENT
-   Six questions, numbered, set on a reading column rather than across the
-   full page. No cards: a card would make each question a feature. They are
-   steps in one diagnosis, so they share one rule and one rhythm. The item
-   entering the viewport lifts slightly in colour - enough to move the eye
-   down the list at reading pace, not enough to notice as an effect.
-   ---------------------------------------------------------------------- */
-.examine{ padding:var(--s-7) 0; }
-.exam-wrap{ max-width:var(--narrow); }
-@media (max-width:1100px){ .exam-wrap{ max-width:100%; } }
-.exam-grid{ display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
-    gap:var(--s-5); align-items:start; }
-@media (max-width:900px){ .exam-grid{ grid-template-columns:1fr; gap:var(--s-4); } }
-.exam-grid > *{ min-width:0; }
-.exam-grid .label{ display:block; margin:0 0 var(--s-3); }
-.exam-list{ list-style:none; margin:0; padding:0; counter-reset:dx; }
-.exam-list li{
-    counter-increment:dx; display:grid; grid-template-columns:auto minmax(0,1fr);
-    gap:var(--s-3); align-items:baseline;
-    padding:var(--s-3) 0; border-top:1px solid var(--rule);
-    font-size:clamp(18px,1.4vw,21px); color:var(--ivory-3); line-height:1.4;
-    transition:color .55s ease;
-}
-.exam-list li:last-child{ border-bottom:1px solid var(--rule); }
-.exam-list li::before{
-    content:counter(dx,decimal-leading-zero);
-    font-family:var(--display); font-size:clamp(19px,1.6vw,23px); color:var(--gold);
-    font-variant-numeric:tabular-nums; line-height:1;
-    transition:color .55s ease;
-}
-.exam-list li.on{ color:var(--ivory); }
-.exam-list li.on::before{ color:var(--gold-lift); }
-@media (prefers-reduced-motion: reduce){
-    .exam-list li,.exam-list li::before{ transition:none; }
-}
-.exam-note{ margin:var(--s-4) 0 0; font-size:var(--t-body); line-height:1.62;
-    color:var(--ivory-3); max-width:46ch; }
-
 /* ---------- who you would be working with ----------
    Placed after the work on purpose: the visitor should want to know who I am
    only once they have seen how I think. No resume, no credentials, no
@@ -1378,6 +1339,32 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
     items.forEach(function(el){ lit.observe(el); });
   }
 
+  /* Second stage of the fragments. They land scattered, hold long enough to be
+     read as separate things, then all pull toward a common left edge and stop
+     short of it. The failed alignment is the argument, so it has to be a
+     distinct beat rather than part of the entrance. */
+  var frags = document.querySelector('.fragments');
+  if (frags) {
+    var settle = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) { return; }
+        settle.unobserve(e.target);
+        window.setTimeout(function(){ e.target.classList.add('settled'); }, 1500);
+      });
+    }, { threshold:0.35 });
+    settle.observe(frags);
+    /* Backstop: if the observer never fires (fast scroll, anchor jump), the
+       settled state still arrives so nobody sees a half-finished figure. */
+    window.setTimeout(function(){ frags.classList.add('settled'); }, 6000);
+  }
+})();
+
+/* Kept out of the reveal script on purpose. That script returns early when the
+   document is not visible, and the connectors are structure, not decoration -
+   a page opened in a background tab was drawing the figure with no lines in
+   it at all. Geometry runs regardless; only the animation is conditional. */
+(function(){
+  "use strict";
   /* The diagram's connectors are real diagonals, so their endpoints depend on
      where the labels actually land after layout. They are measured here and
      re-measured on resize rather than hardcoded, which is the only way the
@@ -1414,25 +1401,6 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
     wire();
     window.addEventListener('resize', function(){ window.requestAnimationFrame(wire); });
     window.addEventListener('load', wire);
-  }
-
-  /* Second stage of the fragments. They land scattered, hold long enough to be
-     read as separate things, then all pull toward a common left edge and stop
-     short of it. The failed alignment is the argument, so it has to be a
-     distinct beat rather than part of the entrance. */
-  var frags = document.querySelector('.fragments');
-  if (frags) {
-    var settle = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (!e.isIntersecting) { return; }
-        settle.unobserve(e.target);
-        window.setTimeout(function(){ e.target.classList.add('settled'); }, 1500);
-      });
-    }, { threshold:0.35 });
-    settle.observe(frags);
-    /* Backstop: if the observer never fires (fast scroll, anchor jump), the
-       settled state still arrives so nobody sees a half-finished figure. */
-    window.setTimeout(function(){ frags.classList.add('settled'); }, 6000);
   }
 })();
 </script>
