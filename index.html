@@ -454,6 +454,73 @@ p.pull i{ font-style:italic; color:var(--ivory); }
 .open-site:hover{ box-shadow:inset 0 -1px 0 var(--gold); }
 
 /* ----------------------------------------------------------------------
+   THE MARK
+   One graphic, used seven times, and it is the thesis drawn at 56px: five
+   lines entering from five different indents, every one of them ending on a
+   single spine. It is the fragments and the home in the same figure.
+
+   It exists because several sections are deliberately left-weighted and the
+   right of those sections was reading as unfinished rather than as quiet. A
+   repeated structural mark closes that without decorating it - the rule being
+   that a graphic has to explain, navigate, or restate the central idea, and
+   this one restates it. It is the only graphic on the page, it never changes,
+   and it is hidden from assistive technology because it says nothing the
+   surrounding text does not already say.
+   ---------------------------------------------------------------------- */
+.mark{ flex:none; width:clamp(40px,4vw,58px); height:auto; overflow:visible; }
+@media (max-width:700px){ .mark{ display:none; } }
+
+/* Section heads that carry the mark become a row: content left, mark top
+   right, which is exactly the space that was empty. */
+.headrow{ display:flex; align-items:flex-start; justify-content:space-between; gap:var(--s-4); }
+.headrow > :first-child{ min-width:0; }
+/* Where the heading sits in a narrow grid column, the mark cannot ride beside
+   it without stealing the measure, so it goes to the corner of the section
+   instead - the same position relative to the page, reached differently. */
+.examine,.who{ position:relative; }
+.mark--corner{ position:absolute; right:0; top:var(--s-7); }
+
+/* ----------------------------------------------------------------------
+   ALSO BUILT
+   Added to answer an objection the three engagements create rather than to
+   show more work. Two of the featured screenshots share a structure, and two
+   similar things seen in sequence read as one template, not as consistency.
+   A strip of visibly different builds converts that read from "he has a
+   layout" into "he has a method he adapts".
+
+   Everything about the treatment is subordinate on purpose. The thumbnails
+   are small, because size is read as importance and these carry no reasoning.
+   They do not link out, because a link invites the reader to evaluate each
+   one, and what this strip is for is a single peripheral impression - range -
+   not twelve more decisions. They are ordered light, dark, light, dark so no
+   two neighbours read alike: the same adjacency effect that made the two
+   featured screenshots look like duplicates. And it sits before the closing
+   invitation, never after it, because the last thing on a page is the thing
+   that is remembered, and that has to be the invitation.
+   ---------------------------------------------------------------------- */
+.also{ margin:var(--s-7) 0 0; }
+.also .label{ display:block; margin:0 0 var(--s-2); }
+.also p{ margin:0 0 var(--s-4); font-size:var(--t-body); color:var(--ivory-2); max-width:46ch; }
+
+.strip{
+    display:flex; gap:var(--s-2); overflow-x:auto; overscroll-behavior-x:contain;
+    scroll-snap-type:x proximity; padding:0 var(--gutter) var(--s-2) 0;
+    margin-right:calc(-1 * var(--gutter));
+    scrollbar-width:thin; scrollbar-color:var(--rule-night) transparent;
+}
+.strip:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
+.strip::-webkit-scrollbar{ height:2px; }
+.strip::-webkit-scrollbar-thumb{ background:var(--rule-night); }
+.strip figure{
+    flex:0 0 auto; margin:0; scroll-snap-align:start;
+    width:clamp(196px,20vw,268px); aspect-ratio:16/10;
+    border:1px solid var(--rule-night); overflow:hidden; background:var(--night-raise);
+}
+.strip img{ display:block; width:100%; height:100%; object-fit:cover; object-position:50% 0; }
+.strip-note{ margin:var(--s-3) 0 0; font-size:var(--t-label); font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--ivory-3); }
+
+/* ----------------------------------------------------------------------
    THE PRIVATE VISIBILITY ASSESSMENT
    Six questions, numbered, set on a reading column rather than across the
    full page. No cards: a card would make each question a feature. They are
@@ -557,6 +624,22 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
 
 <a class="skip" href="#search">Skip to content</a>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- Presentation attributes, not classes: a document stylesheet cannot
+       select into the shadow content a <use> clones, so a CSS rule here
+       paints nothing at all. -->
+  <symbol id="mk" viewBox="0 0 44 40">
+    <g fill="none" stroke-linecap="square" stroke-width="1">
+      <line x1="1"  y1="6"  x2="37" y2="6"  stroke="#CBC8BE" stroke-opacity=".5"/>
+      <line x1="11" y1="13" x2="37" y2="13" stroke="#CBC8BE" stroke-opacity=".5"/>
+      <line x1="5"  y1="20" x2="37" y2="20" stroke="#CBC8BE" stroke-opacity=".5"/>
+      <line x1="16" y1="27" x2="37" y2="27" stroke="#CBC8BE" stroke-opacity=".5"/>
+      <line x1="8"  y1="34" x2="37" y2="34" stroke="#CBC8BE" stroke-opacity=".5"/>
+      <line x1="37" y1="3"  x2="37" y2="37" stroke="#C9A34E" stroke-opacity=".9"/>
+    </g>
+  </symbol>
+</svg>
+
 <div class="act-pine">
   <div class="page">
     <header class="top">
@@ -600,9 +683,11 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
 
       <!-- 1. RECOGNITION -->
       <div class="movement">
-        <div class="mvt-head">
+        <div class="mvt-head headrow"><div>
           <span class="label">01 &mdash; The search</span>
           <h2 class="statement">What happens when someone Googles your name?</h2>
+          </div>
+          <svg class="mark" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
         </div>
         <div class="query">
           <svg width="19" height="19" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="#BFBCB1" stroke-width="1.4"/><path d="M11 11l4 4" stroke="#BFBCB1" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -623,9 +708,11 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
 
       <!-- 2. CONSEQUENCE -->
       <div id="cost" class="movement">
-        <div class="mvt-head">
+        <div class="mvt-head headrow"><div>
           <span class="label">02 &mdash; What it costs</span>
           <h2 class="statement">The information is not missing. Nothing decides what it means.</h2>
+          </div>
+          <svg class="mark" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
         </div>
         <div class="cost-body">
           <div>
@@ -642,9 +729,11 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
 
       <!-- 3. THE SHIFT -->
       <div class="movement">
-        <div class="mvt-head">
+        <div class="mvt-head headrow"><div>
           <span class="label gold">03 &mdash; The home</span>
           <h2 class="statement">Your name deserves a home.</h2>
+          </div>
+          <svg class="mark" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
         </div>
         <div class="home rv">
           <span class="node node--top">Career</span>
@@ -667,6 +756,7 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
 <div class="act-pine">
   <div class="page">
     <section id="approach" class="examine">
+      <svg class="mark mark--corner" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
       <div class="exam-wrap">
       <div class="exam-grid">
         <h2 class="statement">I don&rsquo;t start with design.</h2>
@@ -692,10 +782,29 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
 <div class="act-night">
   <div class="page">
     <main id="work" class="work">
-      <div class="section-head">
-        <h2>Deciding what belongs at the centre.</h2>
-        <p>Three selected engagements.</p>
+      <div class="section-head headrow">
+        <div>
+          <h2>Deciding what belongs at the centre.</h2>
+          <p>Three selected engagements.</p>
+        </div>
+        <svg class="mark" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
       </div>
+
+      <article class="case rv">
+        <h3 class="name">Charles L. Cooper</h3>
+        <p class="role">CFP &middot; Financial planner</p>
+        <span class="commissioned">Commissioned by Charles L. Cooper</span>
+        <figure class="case-shot">
+            <img src="img/charles-lg.jpg" alt="Personal website built for Charles L. Cooper, CFP" width="1320" height="825" loading="lazy" decoding="async">
+          </figure>
+        <div class="why">
+          <span class="k">The decision</span>
+          <p class="decision">Make four decades of continuity the story, not a footnote.</p>
+          <span class="k2">Why I built it this way</span>
+          <p>Tenure reads as unremarkable until you set it against an industry where advisers move every few years. The disclosures a regulated adviser has to carry are built into the structure rather than bolted to the end.</p>
+        </div>
+        <a class="open-site" href="https://ranatahirbilal.github.io/charles-cooper/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
+      </article>
 
       <article class="case rv">
         <h3 class="name">Andrew Charles Cooper</h3>
@@ -729,21 +838,86 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
         <a class="open-site" href="https://ranatahirbilal.github.io/kristina-mcgahan/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
       </article>
 
-      <article class="case rv">
-        <h3 class="name">Charles L. Cooper</h3>
-        <p class="role">CFP &middot; Financial planner</p>
-        <span class="commissioned">Commissioned by Charles L. Cooper</span>
-        <figure class="case-shot">
-            <img src="img/charles-lg.jpg" alt="Personal website built for Charles L. Cooper, CFP" width="1320" height="825" loading="lazy" decoding="async">
+
+      <section class="also rv">
+        <span class="label">Also built</span>
+        <p>Twelve further engagements. Different fields, different structures, the same question each time.</p>
+        <div class="strip" tabindex="0" role="region" aria-label="Twelve further sites. Scroll horizontally to browse.">
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-ana.webp">
+              <img src="img/w-ana.jpg" alt="Personal website built for Ana Eugenia Ferreira, PhD" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
           </figure>
-        <div class="why">
-          <span class="k">The decision</span>
-          <p class="decision">Make four decades of continuity the story, not a footnote.</p>
-          <span class="k2">Why I built it this way</span>
-          <p>Tenure reads as unremarkable until you set it against an industry where advisers move every few years. The disclosures a regulated adviser has to carry are built into the structure rather than bolted to the end.</p>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-boske.webp">
+              <img src="img/w-boske.jpg" alt="Personal website built for Gregory L. Boske" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-berry.webp">
+              <img src="img/w-berry.jpg" alt="Personal website built for Philip Berry" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-chvatal.webp">
+              <img src="img/w-chvatal.jpg" alt="Personal website built for Marinella A. Chvatal, MEd" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-fisher.webp">
+              <img src="img/w-fisher.jpg" alt="Personal website built for John W. Fisher" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-shoemaker.webp">
+              <img src="img/w-shoemaker.jpg" alt="Personal website built for Elery M. Shoemaker" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-laterman.webp">
+              <img src="img/w-laterman.jpg" alt="Personal website built for Frances Iger Laterman" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-silevitch.webp">
+              <img src="img/w-silevitch.jpg" alt="Personal website built for Silevitch, DMD" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-vanfleet.webp">
+              <img src="img/w-vanfleet.jpg" alt="Personal website built for Van Fleet" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-torres.webp">
+              <img src="img/w-torres.jpg" alt="Personal website built for Gabriela Torres" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-werner.webp">
+              <img src="img/w-werner.jpg" alt="Personal website built for Kathleen M. Werner, JD" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure>
+            <picture>
+              <source type="image/webp" srcset="img/w-videll.webp">
+              <img src="img/w-videll.jpg" alt="Personal website built for Jared Videll, DO" width="560" height="350" loading="lazy" decoding="async">
+            </picture>
+          </figure>
         </div>
-        <a class="open-site" href="https://ranatahirbilal.github.io/charles-cooper/" target="_blank" rel="noopener noreferrer">Open the site &#8599;</a>
-      </article>
+        <p class="strip-note">Scroll &rarr;</p>
+      </section>
 
     </main>
   </div>
@@ -754,6 +928,7 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
   <div class="page">
 
     <section class="who">
+      <svg class="mark mark--corner" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
       <div class="who-in">
         <h2 class="statement">I found this problem by reading about people, not by building websites.</h2>
         <div>
@@ -773,7 +948,10 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
     <section id="contact" class="contact">
       <div class="contact-in">
         <div>
-          <h2 class="statement">Start by finding out what your name currently says.</h2>
+          <div class="headrow">
+            <h2 class="statement">Start by finding out what your name currently says.</h2>
+            <svg class="mark" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
+          </div>
           <p>Before you change anything.</p>
           <div class="close-row">
             <p class="quiet">Tell me the name and I will read it the way a stranger would &mdash; what comes back, what you control, and whether there is anything here worth building. If there is not, I will say so.</p>
