@@ -824,16 +824,26 @@ p.pull i{ font-style:italic; color:var(--ivory); }
 .strip-note{ margin:var(--s-3) 0 0; font-size:var(--t-label); font-weight:600;
     letter-spacing:.16em; text-transform:uppercase; color:var(--ivory-3); }
 
+/* Portraits outside the hero. Both are 4:5 and both are held at a modest
+   share of the column - a face at hero scale twice more down the page would
+   read as a personal site rather than an advisory one. */
+.fig{ margin:0; }
+.fig img{ display:block; width:100%; height:auto; aspect-ratio:4/5;
+    object-fit:cover; object-position:50% 24%; }
+@media (max-width:900px){ .fig{ max-width:380px; } }
+
 /* ---------- who you would be working with ----------
    Placed after the work on purpose: the visitor should want to know who I am
    only once they have seen how I think. No resume, no credentials, no
    adjectives about myself. How I found the problem, and how I work. */
 .who{ padding:var(--s-7) 0 var(--s-6); }
-.who-in{ display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
-    gap:var(--s-5); align-items:start; }
+.who-in{ display:grid; grid-template-columns:minmax(0,.62fr) minmax(0,1fr);
+    gap:var(--s-5); align-items:center; }
 @media (max-width:900px){ .who-in{ grid-template-columns:1fr; gap:var(--s-4); } }
+.who-in .fig{ max-width:420px; }
+.who-col{ display:grid; gap:var(--s-4); }
+.who h2.statement{ max-width:17ch; margin:0; }
 .who-in > *{ min-width:0; }
-.who h2.statement{ max-width:15ch; }
 .who p{ margin:0; font-size:clamp(19px,1.5vw,23px);
     line-height:1.55; color:var(--ivory-2); max-width:44ch; }
 .who p:last-child{ margin-bottom:0; }
@@ -842,7 +852,12 @@ p.pull i{ font-style:italic; color:var(--ivory); }
 
 /* ---------- the invitation ---------- */
 .contact{ padding:var(--s-7) 0 var(--s-6); }
-.contact-in{ display:block; }
+.contact-in{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.56fr);
+    gap:var(--s-5); align-items:center; }
+@media (max-width:900px){ .contact-in{ grid-template-columns:1fr; gap:var(--s-4); } }
+.contact-in > *{ min-width:0; }
+.contact-in .fig{ max-width:340px; justify-self:end; }
+.close-row{ grid-column:1 / -1; }
 .contact h2{ max-width:22ch; margin:0 0 var(--s-3); font-size:clamp(36px,4.6vw,66px); }
 /* The invitation closes across the full column rather than hugging the left
    edge: the sentence that lowers the stakes on the left, the single call on
@@ -1236,8 +1251,17 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
     <section class="who">
       <svg class="mark mark--corner" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
       <div class="who-in">
-        <h2 class="statement">I found this problem by reading about people, not by building websites.</h2>
-        <div>
+        <figure class="fig rv">
+          <picture>
+            <source type="image/webp" srcset="img/rana-professional-700.webp 700w, img/rana-professional-1100.webp 1100w" sizes="(max-width:900px) 380px, 26vw">
+            <img src="img/rana-professional-1100.jpg"
+                 srcset="img/rana-professional-700.jpg 700w, img/rana-professional-1100.jpg 1100w"
+                 sizes="(max-width:900px) 380px, 26vw"
+                 alt="Rana Tahir Bilal" width="1100" height="1375" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="who-col">
+          <h2 class="statement">I found this problem by reading about people, not by building websites.</h2>
           <p>I came across accomplished people while researching them through press releases and public records, and the same thing kept appearing: a real reputation spread across directories, company pages and other people&rsquo;s websites, with <b>no clear home around the name</b>. The person had already done the work. The internet was not presenting it as one thing.</p>
         </div>
       </div>
@@ -1252,17 +1276,23 @@ footer{ border-top:1px solid var(--rule); padding:var(--s-3) 0 var(--s-6);
 
     <section id="contact" class="contact">
       <div class="contact-in">
-        <div>
-          <div class="headrow">
-            <h2 class="statement">Start by finding out what your name currently says.</h2>
-            <svg class="mark" aria-hidden="true" focusable="false" viewBox="0 0 44 40"><use href="#mk"/></svg>
-          </div>
+        <div class="contact-lead">
+          <h2 class="statement">Start by finding out what your name currently says.</h2>
           <p>Before you change anything.</p>
-          <div class="close-row">
-            <p class="quiet">Tell me the name and I will read it the way a stranger would &mdash; what comes back, what you control, and whether there is anything here worth building. If there is not, I will say so.</p>
-            <div class="links">
-              <a class="btn" href="mailto:tahirbilal16@gmail.com?subject=Private%20Visibility%20Assessment">Request a Private Visibility Assessment</a>
-            </div>
+        </div>
+        <figure class="fig rv">
+          <picture>
+            <source type="image/webp" srcset="img/rana-contact-700.webp 700w, img/rana-contact-1100.webp 1100w" sizes="(max-width:900px) 380px, 24vw">
+            <img src="img/rana-contact-1100.jpg"
+                 srcset="img/rana-contact-700.jpg 700w, img/rana-contact-1100.jpg 1100w"
+                 sizes="(max-width:900px) 380px, 24vw"
+                 alt="Rana Tahir Bilal" width="1100" height="1375" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="close-row">
+          <p class="quiet">Tell me the name and I will read it the way a stranger would &mdash; what comes back, what you control, and whether there is anything here worth building. If there is not, I will say so.</p>
+          <div class="links">
+            <a class="btn" href="mailto:tahirbilal16@gmail.com?subject=Private%20Visibility%20Assessment">Request a Private Visibility Assessment</a>
           </div>
         </div>
       </div>
