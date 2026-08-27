@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rana Tahir Bilal — Personal brand websites and digital authority</title>
+<meta name="description" content="You have built the reputation. I build the place for it to live. Personal brand websites and digital authority for accomplished people.">
+<meta property="og:title" content="Rana Tahir Bilal — Personal brand websites and digital authority">
+<meta property="og:description" content="You have built the reputation. I build the place for it to live.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap">
+
+<style>
+/* ==========================================================
+   RANA TAHIR BILAL — A PERSONAL PRACTICE
+
+   THE ARGUMENT
+   Not "your website is not good enough". The argument is that
+   an accomplished person already owns a reputation and has
+   nowhere authoritative for it to live. The page is built as
+   one continuous chapter around that: the search, the
+   fragments it returns, the home that gives them somewhere to
+   point.
+
+   VOICE
+   First person singular. Never a plural voice. The subject of
+   almost every sentence is "you", not "I".
+
+   RHYTHM
+   No two consecutive sections share a layout. Portrait split,
+   statement + evidence, thin data strip, dark search chapter,
+   full-bleed statement, offset case studies, index, minimal
+   process, invitation.
+
+   COLOUR
+   Deep green ground, warm ivory ink, one restrained gold.
+   Every value clears WCAG AA with margin on both grounds.
+   Gold marks the after and nothing else.
+   ========================================================== */
+
+:root{
+    --pine:#08251F; --pine-deep:#061B16; --pine-raise:#0E3229;
+    --night:#080A09; --night-raise:#12150F;
+
+    --ivory:#F4F0E8;      /* 14.3:1 on pine, 17.3:1 on night */
+    --ivory-2:#DAD7CD;    /* 11.3:1 on pine */
+    --ivory-3:#CBC8BE;    /* 10.0:1 on pine, 12.2:1 on night. Was #BFBCB1: the
+                             supporting text read as small because it was faint,
+                             not because it was small. */
+    --gold:#C9A34E;       /*  6.8:1 on pine,  9.0:1 on night */
+    --gold-lift:#D9B665;
+
+    --rule:#1A4438; --rule-night:#26281F;
+
+    --display:'DM Serif Display',Georgia,'Times New Roman',serif;
+    --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+
+    --t-hero:clamp(52px,7.6vw,112px);
+    --t-statement:clamp(38px,4.8vw,68px);
+    --t-h2:clamp(28px,2.7vw,38px);
+    --t-h3:clamp(21px,1.75vw,25px);
+    --t-lead:clamp(19px,1.55vw,23px);
+    --t-body:clamp(17px,1.15vw,19px);
+    --t-small:17.5px;
+    --t-nav:14.5px;
+    --t-label:13px;
+
+    --measure:58ch;
+    --page:1320px;
+    --gutter:clamp(20px,4.5vw,60px);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+    margin:0; background:var(--pine); color:var(--ivory);
+    font-family:var(--sans); font-size:var(--t-body); font-weight:400; line-height:1.62;
+    font-variant-numeric:tabular-nums;
+    -webkit-font-smoothing:antialiased; overflow-x:clip;
+}
+
+/* Grid and flex children default to a minimum content width, so both guards
+   are needed or long strings push the page sideways. */
+img,svg{ max-width:100%; }
+p,li,h1,h2,h3,dd,dt,span{ overflow-wrap:break-word; }
+.page > *,.hero-grid > *,.intro-grid > *,.creed-in > *,
+.steps > *,.band > *,.case-head > *,.home-in > *,.direct-in > *,
+.contact-in > *{ min-width:0; }
+
+.page{ max-width:var(--page); margin:0 auto; padding:0 var(--gutter); }
+a{ color:inherit; }
+a:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+.label{
+    font-size:var(--t-label); font-weight:600; letter-spacing:.17em;
+    text-transform:uppercase; color:var(--ivory-3); line-height:1.5;
+}
+.label.gold{ color:var(--gold); }
+.act-pine{ background:var(--pine); }
+.act-night{ background:var(--night); }
+
+/* ---------- masthead ---------- */
+.top{
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    padding:26px 0 22px; border-bottom:1px solid var(--rule);
+}
+.wordmark{ font-weight:700; font-size:16px; letter-spacing:.005em; }
+.top nav{ display:flex; gap:4px clamp(16px,2vw,30px); flex-wrap:wrap; }
+.top nav a{
+    text-decoration:none; font-size:var(--t-nav); font-weight:500;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--ivory-2);
+    padding:11px 0; border-bottom:1px solid transparent;
+    transition:color .18s ease, border-color .18s ease;
+}
+.top nav a:hover{ color:var(--gold); border-bottom-color:var(--gold); }
+
+/* ---------- hero: the idea and the person, together ---------- */
+.hero{ padding:clamp(52px,6.5vw,104px) 0 clamp(52px,6vw,88px); }
+.hero-grid{
+    display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
+    gap:clamp(30px,5vw,76px); align-items:center;
+}
+@media (max-width:1000px){ .hero-grid{ grid-template-columns:1fr; gap:clamp(32px,6vw,48px); } }
+
+h1{
+    font-family:var(--display); font-weight:400;
+    font-size:var(--t-hero); line-height:1.03; letter-spacing:-.018em;
+    margin:0 0 clamp(24px,3vw,36px); max-width:13ch; text-wrap:balance;
+    color:var(--ivory);
+}
+h1 em{ font-style:italic; color:var(--gold); }
+
+/* The whole proposition in two sentences. Anything more is explanation. */
+.hero-sub{
+    font-size:var(--t-lead); line-height:1.45; color:var(--ivory);
+    max-width:30ch; text-wrap:balance; margin:0 0 clamp(28px,3.4vw,40px); font-weight:400;
+}
+.hero-sub b{ font-weight:600; }
+
+.disciplines{ display:flex; flex-wrap:wrap; gap:10px 24px; margin:0 0 clamp(28px,3.4vw,38px); padding:0; list-style:none; }
+.disciplines li{ font-size:var(--t-label); font-weight:600; letter-spacing:.17em; text-transform:uppercase; color:var(--gold); }
+
+.cta-row{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+.cta-quiet{
+    font-size:var(--t-nav); font-weight:600; letter-spacing:.02em; text-decoration:none;
+    color:var(--ivory-2); border-bottom:1px solid var(--rule);
+    padding:12px 0; transition:color .18s ease, border-color .18s ease;
+}
+.cta-quiet:hover{ color:var(--gold); border-color:var(--gold); }
+
+.portrait{ margin:0; position:relative; }
+.portrait img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; border:1px solid var(--rule); }
+@media (max-width:1000px){ .portrait{ max-width:400px; } }
+
+/* ---------- thin strip ---------- */
+.band{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+.band div{ padding:24px clamp(18px,2vw,30px) 24px 0; border-right:1px solid var(--rule); }
+.band div:last-child{ border-right:0; padding-right:0; }
+.band dt{ margin:0 0 10px; }
+.band dd{ margin:0; font-family:var(--display); font-weight:400; font-size:clamp(19px,1.7vw,23px); line-height:1.32; color:var(--ivory); letter-spacing:-.006em; }
+.band dd i{ font-style:italic; color:var(--ivory); }
+@media (max-width:820px){
+    .band{ grid-template-columns:1fr; }
+    .band div{ border-right:0; border-bottom:1px solid var(--rule); padding-right:0; }
+    .band div:last-child{ border-bottom:0; }
+}
+
+/* ---------- headings ---------- */
+h2{
+    font-family:var(--sans); font-weight:600;
+    font-size:var(--t-h2); line-height:1.22; letter-spacing:-.008em; margin:0;
+    max-width:22ch; text-wrap:balance; color:var(--ivory);
+}
+/* The serif is reserved for the statements. That reservation is what makes
+   them read as statements rather than headings. */
+h2.statement{
+    font-family:var(--display); font-weight:400;
+    font-size:var(--t-statement); line-height:1.08; letter-spacing:-.018em;
+    max-width:17ch;
+}
+h3{ font-family:var(--sans); font-weight:600; font-size:var(--t-h3); line-height:1.3; letter-spacing:-.004em; margin:0 0 10px; color:var(--ivory); }
+.section-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin:0 0 clamp(30px,4vw,52px); }
+.section-head p{ margin:0; color:var(--ivory-2); font-size:var(--t-body); max-width:34ch; }
+
+/* ---------- introduction: statement + evidence ---------- */
+.intro{ padding:clamp(56px,6.5vw,96px) 0 clamp(52px,6vw,84px); }
+.intro-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:clamp(32px,5vw,80px); align-items:center; }
+@media (max-width:1000px){ .intro-grid{ grid-template-columns:1fr; gap:36px; } }
+.intro p{ margin:clamp(20px,2.6vw,30px) 0 0; color:var(--ivory-2); font-size:var(--t-body); line-height:1.65; max-width:38ch; }
+/* One figure, one statement, one thought. The three screenshots that used to
+   sit here said what the case studies say better and larger. */
+.fig{ margin:0; position:relative; }
+.fig img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; border:1px solid var(--rule); }
+/* The introduction portrait is framed wider than the others on purpose: it is
+   the first time the visitor meets the person, and a tight face crop at that
+   moment reads as a headshot rather than a composition. */
+.intro .fig img{ aspect-ratio:3/4; }
+
+
+/* ==========================================================
+   THE SEARCH CHAPTER
+   Two movements on one dark ground: what the name returns now,
+   and the home that gives it somewhere to point.
+   ========================================================== */
+.chapter{ padding:clamp(60px,7vw,104px) 0 clamp(56px,6.5vw,96px); }
+.movement{ margin:0 0 clamp(44px,4.6vw,68px); }
+.movement:last-of-type{ margin:0; }
+.mvt-head{ display:flex; align-items:baseline; gap:clamp(16px,2.4vw,32px); margin:0 0 clamp(28px,3.6vw,48px); flex-wrap:wrap; }
+.mvt-head .label{ flex:none; }
+.mvt-head h2{ max-width:20ch; }
+
+.query{
+    display:flex; align-items:center; gap:14px;
+    border:1px solid var(--rule-night); padding:clamp(16px,1.8vw,22px) clamp(18px,2vw,26px);
+    background:var(--night-raise); margin:0 0 clamp(26px,3vw,40px);
+}
+.query svg{ flex:none; }
+.query span{ font-size:clamp(21px,2.2vw,34px); color:var(--ivory); letter-spacing:.01em; }
+.query i{ font-style:normal; color:var(--ivory-3); }
+
+/* Seven sources, scattered, that settle into a column on reveal. The point of
+   the motion is the only point of the section: the parts are all real, they
+   are simply not organised. */
+.fragments{ display:block; }
+/* Each source sits at its own indent and its own width. Aligned, they would
+   read as a tidy list, which is the opposite of the point: the parts are all
+   real and none of them were written together. */
+.frag{
+    border-top:1px solid var(--rule-night); padding:15px 0;
+    display:grid; grid-template-columns:minmax(0,1fr) auto; gap:16px; align-items:baseline;
+}
+.frag:nth-child(1){ margin-left:0;   width:62%; }
+.frag:nth-child(2){ margin-left:15%; width:57%; }
+.frag:nth-child(3){ margin-left:5%;  width:70%; }
+.frag:nth-child(4){ margin-left:24%; width:54%; }
+.frag:nth-child(5){ margin-left:9%;  width:65%; }
+.frag:nth-child(6){ margin-left:32%; width:52%; }
+.frag:nth-child(7){ margin-left:3%;  width:60%; }
+@media (max-width:820px){
+    .frag:nth-child(n){ margin-left:0; width:100%; }
+    .frag:last-child{ border-bottom:1px solid var(--rule-night); }
+}
+.frag b{ font-size:clamp(18px,1.5vw,22px); font-weight:500; color:var(--ivory-2); line-height:1.35; }
+.frag span{ font-size:15.5px; color:var(--ivory-3); text-align:right; }
+.js-reveal .frag{ opacity:0; transform:translate(var(--dx,0), var(--dy,0)); }
+.js-reveal .fragments.in .frag{
+    opacity:1; transform:none;
+    transition:opacity .7s ease, transform .95s cubic-bezier(.2,.72,.24,1);
+}
+.js-reveal .fragments.in .frag:nth-child(1){ transition-delay:.02s; }
+.js-reveal .fragments.in .frag:nth-child(2){ transition-delay:.09s; }
+.js-reveal .fragments.in .frag:nth-child(3){ transition-delay:.16s; }
+.js-reveal .fragments.in .frag:nth-child(4){ transition-delay:.23s; }
+.js-reveal .fragments.in .frag:nth-child(5){ transition-delay:.30s; }
+.js-reveal .fragments.in .frag:nth-child(6){ transition-delay:.37s; }
+.js-reveal .fragments.in .frag:nth-child(7){ transition-delay:.44s; }
+.frag:nth-child(1){ --dx:-46px; --dy:20px; }
+.frag:nth-child(2){ --dx:38px;  --dy:26px; }
+.frag:nth-child(3){ --dx:-30px; --dy:30px; }
+.frag:nth-child(4){ --dx:52px;  --dy:22px; }
+.frag:nth-child(5){ --dx:-40px; --dy:28px; }
+.frag:nth-child(6){ --dx:26px;  --dy:34px; }
+.frag:nth-child(7){ --dx:-52px; --dy:24px; }
+@media (prefers-reduced-motion: reduce){
+    .js-reveal .frag{ opacity:1; transform:none; }
+    .js-reveal .fragments.in .frag{ transition:none; }
+}
+.mvt-note{ font-size:clamp(18px,1.5vw,22px); color:var(--ivory-2); margin:clamp(22px,2.6vw,34px) 0 0; line-height:1.5; max-width:44ch; }
+.mvt-note b{ color:var(--ivory); font-weight:600; }
+
+/* The home. One gold-bordered object, and the only one on the page. */
+/* The destination drawn at the scale of the thing itself. Everything above it
+   is deliberately misaligned; this is the only object on the page where every
+   edge lines up, and that is the argument made visible rather than stated. */
+.home{ border:1px solid var(--gold); background:var(--night-raise); }
+.home-bar{ display:flex; align-items:center; gap:11px; border-bottom:1px solid var(--rule-night); padding:15px clamp(20px,2.4vw,34px); }
+.home-bar i{ width:7px; height:7px; border-radius:50%; background:var(--rule-night); flex:none; }
+.home-bar span{ font-size:var(--t-label); font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-left:8px; }
+.home-in{
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:clamp(24px,3.5vw,56px);
+    padding:clamp(32px,4vw,64px) clamp(20px,2.4vw,34px) clamp(36px,4.5vw,70px);
+    align-items:end;
+}
+@media (max-width:820px){ .home-in{ grid-template-columns:1fr; gap:28px; align-items:start; } }
+.home-name{ font-family:var(--display); font-weight:400; font-size:clamp(38px,5.2vw,78px); line-height:1; letter-spacing:-.022em; color:var(--ivory); margin:0; }
+.home-role{ font-size:var(--t-label); font-weight:600; letter-spacing:.17em; text-transform:uppercase; color:var(--ivory-3); margin:18px 0 0; }
+.contents{ list-style:none; margin:0; padding:0; }
+.contents li{ font-size:clamp(17px,1.35vw,20px); color:var(--ivory-2); padding:12px 0; border-top:1px solid var(--rule-night); }
+.contents li:first-child{ border-top:0; padding-top:0; }
+
+p.pull{
+    margin:clamp(76px,9vw,150px) 0 clamp(20px,3vw,44px); padding:clamp(48px,5.5vw,80px) 0 0;
+    border-top:1px solid var(--rule-night);
+    font-family:var(--display); font-weight:400;
+    font-size:clamp(36px,5vw,74px); line-height:1.08; letter-spacing:-.018em;
+    color:var(--ivory); max-width:26ch;
+}
+p.pull i{ font-style:italic; color:var(--ivory); }
+
+/* ---------- philosophy: one line, and room around it ---------- */
+.creed{ padding:clamp(72px,8.5vw,136px) 0; }
+.creed-in{ display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr); gap:clamp(30px,4.5vw,72px); align-items:end; }
+@media (max-width:900px){ .creed-in{ grid-template-columns:1fr; gap:30px; align-items:start; } }
+@media (max-width:600px){ .creed-in .fig{ max-width:340px; } }
+.creed h2.statement{ max-width:15ch; }
+.creed p{ margin:clamp(26px,3vw,38px) 0 0; color:var(--ivory-2); font-size:var(--t-body); line-height:1.65; max-width:38ch; }
+.creed b{ color:var(--ivory); font-weight:600; }
+
+
+/* ---------- work: three people, then an index ---------- */
+.work{ padding:clamp(56px,6.5vw,96px) 0 clamp(52px,6vw,88px); }
+
+.case{ margin:0 0 clamp(48px,5.5vw,84px); }
+.case:last-of-type{ margin-bottom:clamp(56px,7vw,96px); }
+/* The screenshot is the proof, so it gets the full column. The person is named
+   above it at statement scale, and the single strategic line sits under it. */
+.case-head{
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.85fr);
+    gap:clamp(16px,3vw,56px); align-items:end; margin:0 0 clamp(20px,2.4vw,30px);
+}
+@media (max-width:820px){ .case-head{ grid-template-columns:1fr; gap:14px; align-items:start; } }
+.case-line{ margin:0; font-size:var(--t-body); line-height:1.6; color:var(--ivory-2); max-width:44ch; }
+
+.name{ font-family:var(--display); font-weight:400; font-size:clamp(26px,2.5vw,36px); line-height:1.14; margin:0 0 8px; letter-spacing:-.012em; color:var(--ivory); }
+.role{ font-size:14px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--ivory-3); margin:0 0 clamp(16px,2vw,24px); line-height:1.4; }
+.case-line{ margin:0; font-size:var(--t-body); line-height:1.6; color:var(--ivory-2); max-width:34ch; }
+/* Three short reads under the screenshot: positioning is the judgement call,
+   structure is the architecture, purpose is what it has to do. That trio is
+   the difference between showing design skill and showing judgement. */
+.case-notes{ list-style:none; margin:clamp(20px,2.4vw,30px) 0 0; padding:0;
+    display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(20px,3vw,52px); }
+@media (max-width:760px){ .case-notes{ grid-template-columns:1fr; gap:20px; } }
+.case-notes > li{ border-top:1px solid var(--rule-night); padding-top:14px; min-width:0; }
+.case-notes .k{ display:block; font-size:var(--t-label); font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ivory-3); margin:0 0 8px; }
+.case-notes .v{ display:block; font-size:var(--t-small); line-height:1.55; color:var(--ivory-2); }
+
+.case-shot{ display:block; text-decoration:none; position:relative; overflow:hidden; background:var(--night-raise); border:1px solid var(--rule-night); aspect-ratio:16/10; }
+.case-shot img{ width:100%; height:100%; object-fit:cover; object-position:50% 0; display:block; transition:transform .7s cubic-bezier(.2,.7,.25,1); }
+.case-shot:hover img{ transform:scale(1.03); }
+.case-shot:hover{ border-color:var(--gold); }
+@media (prefers-reduced-motion: reduce){ .case-shot img{ transition:none; } .case-shot:hover img{ transform:none; } }
+.visit{
+    position:absolute; right:0; bottom:0; background:var(--gold); color:#14100A;
+    font-size:var(--t-label); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    padding:10px 15px; transform:translateY(100%); transition:transform .3s cubic-bezier(.2,.7,.25,1);
+}
+.case-shot:hover .visit, .case-shot:focus-visible .visit{ transform:none; }
+@media (prefers-reduced-motion: reduce){ .visit{ transition:none; } }
+@media (hover:none){ .visit{ transform:none; } }
+
+/* The remaining twelve as an index, not a thumbnail wall: at wall size the
+   screenshots stop being evidence and start being wallpaper. */
+/* ---------- the other twelve, as a slow crawl ---------- */
+/* Three case studies carry the argument; these twelve carry the range. A
+   still list of names proved nothing a reader would stop for, so the twelve
+   are shown as people. The strip runs edge to edge and moves at roughly one
+   name every five seconds - slow enough to read a name in passing, not a
+   carousel demanding attention. It stops on hover, on keyboard focus, and
+   entirely for anyone who has asked for reduced motion. */
+.more{ border-top:1px solid var(--rule-night); padding-top:clamp(20px,2.4vw,30px); }
+.more .label{ display:block; margin:0 0 clamp(20px,2.4vw,28px); }
+.crawl{
+    width:100vw; margin-left:calc(50% - 50vw);
+    overflow:hidden; padding:4px 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+}
+.crawl-track{ display:flex; width:max-content; animation:crawl 68s linear infinite; }
+.crawl:hover .crawl-track,
+.crawl:focus-within .crawl-track{ animation-play-state:paused; }
+@keyframes crawl{ from{ transform:translate3d(0,0,0); } to{ transform:translate3d(-50%,0,0); } }
+
+.chip{
+    display:flex; align-items:center; gap:16px; text-decoration:none;
+    padding:10px clamp(20px,2.2vw,34px) 10px 0; flex:none;
+    transition:opacity .25s ease;
+}
+.crawl:hover .chip{ opacity:.45; }
+.crawl .chip:hover, .crawl .chip:focus-visible{ opacity:1; }
+.chip img{
+    width:76px; height:76px; border-radius:50%; display:block; flex:none;
+    border:1px solid var(--rule-night);
+}
+.chip-t{ display:block; }
+.chip-t b{ display:block; font-size:17px; font-weight:600; color:var(--ivory); line-height:1.3; white-space:nowrap; }
+/* .chip-t > span, not .chip span: a bare descendant selector also matches the
+   wrapper, which would uppercase the person's name. */
+.chip-t > span{ display:block; font-size:13.5px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--ivory-3); margin-top:5px; white-space:nowrap; }
+.chip:hover .chip-t b, .chip:focus-visible .chip-t b{ color:var(--gold); }
+
+@media (prefers-reduced-motion: reduce){
+    /* No motion at all: the strip becomes something the reader scrolls. */
+    .crawl{ overflow-x:auto; -webkit-mask-image:none; mask-image:none; }
+    .crawl-track{ animation:none; }
+}
+@media (max-width:600px){ .chip img{ width:64px; height:64px; } .chip{ gap:13px; } }
+
+/* ---------- before I build anything ---------- */
+.examine{ padding:clamp(60px,7vw,108px) 0; border-bottom:1px solid var(--rule); }
+.exam-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(30px,4.5vw,76px); align-items:end; }
+@media (max-width:820px){ .exam-grid{ grid-template-columns:1fr; gap:26px; align-items:start; } }
+.exam-grid > *{ min-width:0; }
+.exam-grid .label{ display:block; margin:0 0 6px; }
+.exam-list{ list-style:none; margin:0; padding:0; }
+.exam-list li{ font-size:var(--t-lead); color:var(--ivory-2); padding:14px 0; border-bottom:1px solid var(--rule); line-height:1.4; }
+
+/* ---------- direct access ---------- */
+.direct{ padding:clamp(52px,6vw,88px) 0; border-bottom:1px solid var(--rule); }
+.direct-in{ display:grid; grid-template-columns:minmax(0,.62fr) minmax(0,1fr); gap:clamp(24px,4vw,72px); align-items:end; }
+@media (max-width:760px){ .direct-in{ grid-template-columns:1fr; gap:20px; align-items:start; } }
+.direct h2.statement{ max-width:9ch; margin:0; }
+.direct p{ margin:0; color:var(--ivory-2); font-size:var(--t-lead); line-height:1.5; max-width:38ch; }
+.direct b{ color:var(--ivory); font-weight:600; }
+
+/* ---------- process ---------- */
+.process{ padding:clamp(56px,6.5vw,96px) 0; border-bottom:1px solid var(--rule); }
+.steps{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(26px,3.4vw,56px); }
+@media (max-width:820px){ .steps{ grid-template-columns:1fr; } }
+/* Numbered because this genuinely is a sequence. */
+.step{ border-top:1px solid var(--rule); padding-top:22px; }
+.step .label{ color:var(--gold); display:block; margin:0 0 14px; }
+.step p{ margin:0; color:var(--ivory-2); font-size:var(--t-body); line-height:1.55; }
+.step p b{ display:block; color:var(--ivory); font-weight:400; font-family:var(--display); font-size:var(--t-h3); line-height:1.25; margin:0 0 10px; }
+
+
+
+/* ---------- the invitation ---------- */
+.contact{ padding:clamp(76px,9vw,148px) 0 clamp(56px,6.5vw,92px); }
+.contact-in{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); gap:clamp(30px,4.5vw,72px); align-items:end; }
+@media (max-width:900px){ .contact-in{ grid-template-columns:1fr; gap:30px; align-items:start; } }
+@media (max-width:600px){ .contact-in .fig{ max-width:320px; } }
+.contact h2{ max-width:15ch; margin:0 0 clamp(28px,3.4vw,40px); }
+.contact p{ color:var(--ivory-2); font-size:clamp(20px,1.8vw,27px); line-height:1.45; max-width:24ch; margin:0 0 clamp(34px,4.5vw,50px); font-family:var(--display); }
+.links{ display:flex; flex-wrap:wrap; gap:16px; }
+
+.btn{
+    display:inline-block; text-decoration:none;
+    font-family:var(--sans); font-size:15.5px; font-weight:700; letter-spacing:.02em;
+    padding:19px 32px; border:1px solid var(--gold); background:var(--gold); color:#14100A;
+    transition:background .18s ease, color .18s ease, border-color .18s ease;
+}
+.btn.ghost{ background:transparent; color:var(--ivory); border-color:var(--rule); }
+.btn:hover{ background:var(--gold-lift); border-color:var(--gold-lift); color:#14100A; }
+.btn.ghost:hover{ background:transparent; border-color:var(--gold); color:var(--gold); }
+@media (prefers-reduced-motion: reduce){ .btn{ transition:none; } }
+
+footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; }
+
+/* ---------- entrance ---------- */
+.js-reveal .rv{ opacity:0; transform:translateY(14px); }
+.js-reveal .rv.in{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.25,1); }
+.js-reveal .rv.late.in{ transition-delay:.42s; }
+@media (prefers-reduced-motion: reduce){
+    .js-reveal .rv{ opacity:1; transform:none; }
+    .js-reveal .rv.in{ transition:none; }
+    .js-reveal .rv.late.in{ transition-delay:0s; }
+}
+</style>
+</head>
+<body>
+
+<div class="act-pine">
+  <div class="page">
+    <header class="top">
+      <span class="wordmark">Rana Tahir Bilal</span>
+      <nav class="label">
+        <a href="#search">The problem</a>
+        <a href="#approach">Approach</a>
+        <a href="#work">Selected work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1>Remarkable people, <em>invisible</em> online.</h1>
+          <p class="hero-sub">I help accomplished people build <b>the digital home their reputation deserves</b>.</p>
+          <ul class="disciplines">
+            <li>Personal Branding</li>
+            <li>Google Visibility</li>
+            <li>Digital Authority</li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn" href="mailto:tahirbilal16@gmail.com?subject=Private%20Visibility%20Assessment">Request a Private Visibility Assessment</a>
+            <a class="cta-quiet" href="#work">See the work</a>
+          </div>
+        </div>
+        <figure class="portrait rv">
+          <img src="img/rana-portrait.jpg" alt="Rana Tahir Bilal" width="880" height="1100" fetchpriority="high" decoding="async">
+        </figure>
+      </div>
+
+      <dl class="band">
+        <div><dt class="label">The practice</dt><dd>One person. <i>Not an agency.</i></dd></div>
+        <div><dt class="label">What I build</dt><dd>The <i>authoritative home</i> for your name</dd></div>
+        <div><dt class="label">How I work</dt><dd>Direct access, start to finish</dd></div>
+      </dl>
+    </section>
+
+    <section class="intro">
+      <div class="intro-grid">
+        <div>
+          <h2 class="statement">I work with people whose careers are bigger than their Google results.</h2>
+          <p>You are known in your field. Online, your name returns whatever the internet happened to keep.</p>
+        </div>
+        <figure class="fig rv">
+          <img src="img/rana-window.jpg" alt="Rana Tahir Bilal" width="880" height="1174" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ============ THE SEARCH CHAPTER ============ -->
+<div class="act-night">
+  <div class="page">
+    <section id="search" class="chapter">
+
+      <div class="movement">
+        <div class="mvt-head">
+          <span class="label">01 &mdash; The search</span>
+          <h2 class="statement">What happens when someone Googles your name?</h2>
+        </div>
+        <div class="query">
+          <svg width="19" height="19" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="#BFBCB1" stroke-width="1.4"/><path d="M11 11l4 4" stroke="#BFBCB1" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <span>&ldquo;<i>your name</i>&rdquo;</span>
+        </div>
+        <div class="fragments rv">
+          <div class="frag"><b>LinkedIn</b><span>Last edited some years ago</span></div>
+          <div class="frag"><b>Company biography</b><span>Accurate until you leave</span></div>
+          <div class="frag"><b>A podcast appearance</b><span>One hour, no context</span></div>
+          <div class="frag"><b>An article from 2019</b><span>Still read first</span></div>
+          <div class="frag"><b>A professional directory</b><span>Written by a stranger</span></div>
+          <div class="frag"><b>A social profile</b><span>Not written for this</span></div>
+          <div class="frag"><b>A conference page</b><span>Archived after the event</span></div>
+        </div>
+        <p class="mvt-note"><b>Fragments of a reputation.</b> No clear digital home.</p>
+      </div>
+
+      <div class="movement">
+        <div class="mvt-head">
+          <span class="label gold">02 &mdash; The home</span>
+          <h2 class="statement">Your name deserves a home.</h2>
+        </div>
+        <div class="home rv">
+          <div class="home-bar" aria-hidden="true"><i></i><i></i><i></i><span>yourname.com</span></div>
+          <div class="home-in">
+            <div>
+              <p class="home-name">Your Name</p>
+              <p class="home-role">Your digital home</p>
+            </div>
+            <ul class="contents">
+              <li>Your story</li>
+              <li>Your expertise</li>
+              <li>Your accomplishments</li>
+              <li>Your work and media</li>
+              <li>Your ideas and speaking</li>
+              <li>Your professional identity</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mvt-note">I build the place where the story comes together.</p>
+      </div>
+
+      <p class="pull">Your reputation already exists. <i>I build the digital infrastructure around it.</i></p>
+    </section>
+  </div>
+</div>
+
+<div class="act-pine">
+  <div class="page">
+
+    <section id="approach" class="creed">
+      <div class="creed-in">
+        <div>
+          <h2 class="statement">I don&rsquo;t make people look important. I make it easier to see why they already are.</h2>
+          <p>No award, title, date or quote appears on a site unless you have confirmed it. If it cannot be verified it is <b>marked for review, not filled in</b>.</p>
+        </div>
+        <figure class="fig rv">
+          <img src="img/rana-working.jpg" alt="Rana Tahir Bilal at work" width="880" height="1100" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="act-night">
+  <div class="page">
+    <main id="work" class="work">
+      <div class="section-head">
+        <h2>I don&rsquo;t design pages. I represent people.</h2>
+        <p>Three in full. Every site is live &mdash; each link opens the working thing.</p>
+      </div>
+
+      <article class="case">
+        <div class="case-head rv">
+          <div>
+            <p class="name">Andrew Charles Cooper</p>
+            <p class="role">Aviation &amp; patent counsel</p>
+          </div>
+          <p class="case-line">A legal history most people could not parse, built into a home that makes his expertise and identity readable at a glance.</p>
+        </div>
+        <a class="case-shot" href="https://ranatahirbilal.github.io/andrew-cooper/" target="_blank" rel="noopener noreferrer">
+          <img src="img/cooper-lg.jpg" alt="Personal website built for Andrew Charles Cooper" width="1320" height="825" loading="lazy" decoding="async">
+          <span class="visit">Open the site &#8599;</span>
+        </a>
+        <ul class="case-notes"><li><span class="k">Positioning</span><span class="v">The lawyer called when the rulebook does not exist yet.</span></li><li><span class="k">Structure</span><span class="v">Career, patents and recognition organised as one readable record.</span></li><li><span class="k">Purpose</span><span class="v">A single authoritative result for his name.</span></li></ul>
+      </article>
+
+      <article class="case">
+        <div class="case-head rv">
+          <div>
+            <p class="name">Kristina M. McGahan</p>
+            <p class="role">RN, BSN &middot; Clinician &amp; author</p>
+          </div>
+          <p class="case-line">A clinical career and a book with no shared home. One destination now carries her practice, her writing and her speaking.</p>
+        </div>
+        <a class="case-shot" href="https://ranatahirbilal.github.io/kristina-mcgahan/" target="_blank" rel="noopener noreferrer">
+          <img src="img/kristina-lg.jpg" alt="Personal website built for Kristina M. McGahan, RN, BSN" width="1320" height="825" loading="lazy" decoding="async">
+          <span class="visit">Open the site &#8599;</span>
+        </a>
+        <ul class="case-notes"><li><span class="k">Positioning</span><span class="v">The nurse who teaches other nurses to read the monitor early.</span></li><li><span class="k">Structure</span><span class="v">Practice, book and speaking under one roof.</span></li><li><span class="k">Purpose</span><span class="v">One destination for clinicians, publishers and organisers.</span></li></ul>
+      </article>
+
+      <article class="case">
+        <div class="case-head rv">
+          <div>
+            <p class="name">Charles L. Cooper</p>
+            <p class="role">CFP &middot; Financial planner</p>
+          </div>
+          <p class="case-line">Four decades at one firm, invisible outside it. A compliant home that makes continuity the point, carrying every disclosure a regulated adviser needs.</p>
+        </div>
+        <a class="case-shot" href="https://ranatahirbilal.github.io/charles-cooper/" target="_blank" rel="noopener noreferrer">
+          <img src="img/charles-lg.jpg" alt="Personal website built for Charles L. Cooper, CFP" width="1320" height="825" loading="lazy" decoding="async">
+          <span class="visit">Open the site &#8599;</span>
+        </a>
+        <ul class="case-notes"><li><span class="k">Positioning</span><span class="v">Continuity as the differentiator in an industry that churns.</span></li><li><span class="k">Structure</span><span class="v">Four decades of practice, with every required disclosure in place.</span></li><li><span class="k">Purpose</span><span class="v">A compliant home a regulated adviser can point to.</span></li></ul>
+      </article>
+
+      <div class="more">
+        <span class="label">Twelve more, all live &#8594;</span>
+        <div class="crawl">
+          <div class="crawl-track">
+          <a class="chip" href="https://ranatahirbilal.github.io/elery-shoemaker/" target="_blank" rel="noopener noreferrer"><img src="img/av/shoemaker.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Elery M. Shoemaker</b><span>Nuclear power executive</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/marinella-chvatal/" target="_blank" rel="noopener noreferrer"><img src="img/av/chvatal.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Marinella A. Chvatal, MEd</b><span>Founder &amp; CEO</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/jared-videll/" target="_blank" rel="noopener noreferrer"><img src="img/av/videll.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Jared Videll, DO</b><span>Cardiologist &middot; Lt. Col., USAR</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/kathleen-werner/" target="_blank" rel="noopener noreferrer"><img src="img/av/werner.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Kathleen M. Werner, JD</b><span>Law firm owner</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/gabriela-torres/" target="_blank" rel="noopener noreferrer"><img src="img/av/torres.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Gabriela Torres</b><span>Foundation executive</span></span></a>
+          <a class="chip" href="https://playful-mousse-00f181.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="img/av/vanfleet.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Dr. David D. Van Fleet</b><span>Professor Emeritus</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/philip-berry/" target="_blank" rel="noopener noreferrer"><img src="img/av/berry.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Philip Berry</b><span>Executive coach</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/ana-ferreira/" target="_blank" rel="noopener noreferrer"><img src="img/av/ana.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Ana Eugenia Ferreira, PhD</b><span>Clinical psychologist</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/frances-iger-laterman/" target="_blank" rel="noopener noreferrer"><img src="img/av/laterman.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Frances Iger Laterman</b><span>Private art dealer</span></span></a>
+          <a class="chip" href="https://illustrious-marshmallow-3491a0.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="img/av/silevitch.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Dr. Adam Silevitch, DMD</b><span>Pediatric dentist</span></span></a>
+          <a class="chip" href="https://unrivaled-monstera-cb7475.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="img/av/boske.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Gregory E. Boske</b><span>Medical transport</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/john-fisher/" target="_blank" rel="noopener noreferrer"><img src="img/av/fisher.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>John W. Fisher</b><span>Poet &amp; composer</span></span></a>
+          <span aria-hidden="true" style="display:contents">
+          <a class="chip" href="https://ranatahirbilal.github.io/elery-shoemaker/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/shoemaker.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Elery M. Shoemaker</b><span>Nuclear power executive</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/marinella-chvatal/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/chvatal.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Marinella A. Chvatal, MEd</b><span>Founder &amp; CEO</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/jared-videll/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/videll.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Jared Videll, DO</b><span>Cardiologist &middot; Lt. Col., USAR</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/kathleen-werner/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/werner.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Kathleen M. Werner, JD</b><span>Law firm owner</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/gabriela-torres/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/torres.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Gabriela Torres</b><span>Foundation executive</span></span></a>
+          <a class="chip" href="https://playful-mousse-00f181.netlify.app/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/vanfleet.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Dr. David D. Van Fleet</b><span>Professor Emeritus</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/philip-berry/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/berry.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Philip Berry</b><span>Executive coach</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/ana-ferreira/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/ana.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Ana Eugenia Ferreira, PhD</b><span>Clinical psychologist</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/frances-iger-laterman/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/laterman.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Frances Iger Laterman</b><span>Private art dealer</span></span></a>
+          <a class="chip" href="https://illustrious-marshmallow-3491a0.netlify.app/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/silevitch.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Dr. Adam Silevitch, DMD</b><span>Pediatric dentist</span></span></a>
+          <a class="chip" href="https://unrivaled-monstera-cb7475.netlify.app/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/boske.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>Gregory E. Boske</b><span>Medical transport</span></span></a>
+          <a class="chip" href="https://ranatahirbilal.github.io/john-fisher/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="img/av/fisher.jpg" alt="" width="192" height="192" decoding="async"><span class="chip-t"><b>John W. Fisher</b><span>Poet &amp; composer</span></span></a>
+          </span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="act-pine">
+  <div class="page">
+
+    <section class="direct">
+      <div class="direct-in">
+        <h2 class="statement">Direct access.</h2>
+        <p>You work directly with <b>me</b>, from first conversation to final launch.</p>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="section-head"><h2>Three steps.</h2></div>
+      <div class="steps">
+        <div class="step">
+          <span class="label">01</span>
+          <p><b>Position</b>Understand the reputation, career, expertise and audience.</p>
+        </div>
+        <div class="step">
+          <span class="label">02</span>
+          <p><b>Build</b>Turn that understanding into a digital identity and an authoritative website.</p>
+        </div>
+        <div class="step">
+          <span class="label">03</span>
+          <p><b>Strengthen</b>Build the foundation for long-term visibility and credibility.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="examine">
+      <div class="exam-grid">
+        <h2 class="statement">I don&rsquo;t start with design.</h2>
+        <div>
+          <span class="label">I start by understanding</span>
+          <ul class="exam-list">
+            <li>Who you are</li>
+            <li>What you&rsquo;ve built</li>
+            <li>What people should understand about you</li>
+            <li>What your online presence currently says</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="contact-in">
+        <div>
+          <h2 class="statement">If your work is hard to explain, that&rsquo;s the job.</h2>
+          <p>I&rsquo;d like to understand what you&rsquo;ve built.</p>
+          <div class="links">
+            <a class="btn" href="mailto:tahirbilal16@gmail.com?subject=Private%20Visibility%20Assessment">Request a Private Visibility Assessment</a>
+            <a class="btn ghost" href="#work">See the work</a>
+          </div>
+        </div>
+        <figure class="fig rv">
+          <img src="img/rana-authority.jpg" alt="Rana Tahir Bilal" width="880" height="1101" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <footer class="label">
+      <span>Rana Tahir Bilal &middot; Personal brand websites &amp; digital authority</span>
+      <span>Direct access</span>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  /* Reveal only when the tab is genuinely visible. Arming on a hidden tab
+     risks leaving elements at opacity 0, because transitions and observers
+     behave differently in a backgrounded tab. */
+  if (!('IntersectionObserver' in window) || document.visibilityState !== 'visible') { return; }
+  document.documentElement.classList.add('js-reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) { return; }
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin:'0px 0px -8% 0px', threshold:0.06 });
+  Array.prototype.forEach.call(document.querySelectorAll('.rv'), function(el){ io.observe(el); });
+
+  /* A geometry check that does not depend on the observer firing.
+     IntersectionObserver coalesces: during a fast scroll, or an anchor jump
+     straight to #work, it can report only the final state and never mark
+     elements that passed through the viewport on the way. That left three
+     case studies at opacity 0 over a 3000px stretch of page - a black void
+     where the strongest proof on the site was supposed to be. Anything whose
+     top has entered the viewport is revealed here regardless. */
+  var pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  var queued = false;
+  function sweep(){
+    queued = false;
+    var edge = window.innerHeight + 40;
+    pending = pending.filter(function(el){
+      if (el.classList.contains('in') || el.getBoundingClientRect().top < edge) {
+        el.classList.add('in');
+        return false;
+      }
+      return true;
+    });
+    if (!pending.length) {
+      window.removeEventListener('scroll', onMove);
+      window.removeEventListener('resize', onMove);
+    }
+  }
+  function onMove(){ if (!queued) { queued = true; window.requestAnimationFrame(sweep); } }
+  window.addEventListener('scroll', onMove, { passive:true });
+  window.addEventListener('resize', onMove, { passive:true });
+  sweep();
+
+  /* Final backstop, well inside the time a reader would notice. */
+  window.setTimeout(function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.rv:not(.in)'), function(el){ el.classList.add('in'); });
+  }, 1500);
+})();
+</script>
+</body>
+</html>
