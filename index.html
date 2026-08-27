@@ -182,7 +182,11 @@ h3{ font-family:var(--sans); font-weight:600; font-size:var(--t-h3); line-height
 
 /* ---------- introduction: statement + evidence ---------- */
 .intro{ padding:clamp(56px,6.5vw,96px) 0 clamp(52px,6vw,84px); }
-.intro-grid{ display:block; }
+.intro-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.82fr); gap:clamp(32px,5vw,80px); align-items:center; }
+@media (max-width:1000px){ .intro-grid{ grid-template-columns:1fr; gap:36px; } }
+.fig{ margin:0; }
+.fig img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; object-position:50% 28%; }
+@media (max-width:1000px){ .fig{ max-width:430px; } .fig img{ object-position:50% 22%; } }
 .intro p{ margin:clamp(20px,2.6vw,30px) 0 0; color:var(--ivory-2); font-size:var(--t-body); line-height:1.65; max-width:38ch; }
 
 
@@ -473,6 +477,15 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
           <h2 class="statement">I work with people whose careers are bigger than their Google results.</h2>
           <p>You are known in your field. Online, your name returns whatever the internet happened to keep.</p>
         </div>
+        <figure class="fig rv">
+          <picture>
+            <source type="image/webp" srcset="img/rana-professional-700.webp 700w, img/rana-professional-1100.webp 1100w" sizes="(max-width:1000px) 430px, 44vw">
+            <img src="img/rana-professional-1100.jpg"
+                 srcset="img/rana-professional-700.jpg 700w, img/rana-professional-1100.jpg 1100w"
+                 sizes="(max-width:1000px) 430px, 44vw"
+                 alt="Rana Tahir Bilal" width="1100" height="1375" loading="lazy" decoding="async">
+          </picture>
+        </figure>
       </div>
     </section>
   </div>
