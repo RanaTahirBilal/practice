@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rana Tahir Bilal — Personal brand websites and digital authority</title>
-<meta name="description" content="You have built the reputation. I build the place for it to live. Personal brand websites and digital authority for accomplished people.">
-<meta property="og:title" content="Rana Tahir Bilal — Personal brand websites and digital authority">
+<title>Rana Tahir Bilal — Digital identity and authority</title>
+<meta name="description" content="You have built the reputation. I build the place for it to live. Digital identity and authority for accomplished people.">
+<meta property="og:title" content="Rana Tahir Bilal — Digital identity and authority">
 <meta property="og:description" content="You have built the reputation. I build the place for it to live.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -335,7 +335,11 @@ p.pull i{ font-style:italic; color:var(--ivory); }
 @media (max-width:760px){ .why{ grid-template-columns:1fr; gap:10px; } }
 .why > *{ min-width:0; }
 .why .k{ font-size:var(--t-label); font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ivory-3); }
-.why p{ margin:0; font-size:var(--t-body); line-height:1.6; color:var(--ivory-2); max-width:62ch; }
+/* The decision is set at statement scale, the reasoning under it at body
+   scale. A visitor who reads one line per project should read the judgement,
+   not the justification. */
+.why .decision{ margin:0; font-size:clamp(20px,1.75vw,26px); line-height:1.35; letter-spacing:-.008em; color:var(--ivory); max-width:34ch; }
+.why p{ margin:14px 0 0; font-size:var(--t-body); line-height:1.6; color:var(--ivory-2); max-width:58ch; }
 
 .case-shot{ display:block; text-decoration:none; position:relative; overflow:hidden; background:var(--night-raise); border:1px solid var(--rule-night); aspect-ratio:16/10; }
 .case-shot img{ width:100%; height:100%; object-fit:cover; object-position:50% 0; display:block; transition:transform .7s cubic-bezier(.2,.7,.25,1); }
@@ -570,7 +574,7 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
           <img src="img/cooper-lg.jpg" alt="Personal website built for Andrew Charles Cooper" width="1320" height="825" loading="lazy" decoding="async">
           <span class="visit">Open the site &#8599;</span>
         </a>
-        <div class="why"><span class="k">Why I built it this way</span><p>His public record runs across aviation, patent law and litigation &mdash; three fields most readers treat as unrelated, so each one made the others harder to see. I built the site to make those threads legible from one place, and led on the single fact that orders the rest: he is the lawyer called when the rulebook does not exist yet.</p></div>
+        <div class="why"><span class="k">The decision</span><div><p class="decision">Lead with the rarest thing in his career: he is the lawyer called when the rulebook does not exist yet.</p><p>His public record runs across aviation, patent law and litigation &mdash; three fields most readers treat as unrelated, so each one made the others harder to see.</p></div></div>
       </article>
 
       <article class="case">
@@ -585,7 +589,7 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
           <img src="img/kristina-lg.jpg" alt="Personal website built for Kristina M. McGahan, RN, BSN" width="1320" height="825" loading="lazy" decoding="async">
           <span class="visit">Open the site &#8599;</span>
         </a>
-        <div class="why"><span class="k">Why I built it this way</span><p>Her practice, her book and her speaking all existed, but in three separate places, so each one made the other two look smaller than they were. I built one home where a hospital, a publisher and a conference organiser all land on the same person rather than three partial ones.</p></div>
+        <div class="why"><span class="k">The decision</span><div><p class="decision">Bring practice, authorship and speaking into one professional identity.</p><p>Her practice, her book and her speaking existed in three separate places, so a hospital, a publisher and a conference organiser each reached a different partial version of her.</p></div></div>
       </article>
 
       <article class="case">
@@ -600,7 +604,7 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
           <img src="img/charles-lg.jpg" alt="Personal website built for Charles L. Cooper, CFP" width="1320" height="825" loading="lazy" decoding="async">
           <span class="visit">Open the site &#8599;</span>
         </a>
-        <div class="why"><span class="k">Why I built it this way</span><p>Four decades at one firm reads as unremarkable until you set it against an industry where advisers move every few years. I made tenure the headline instead of a footnote, and built the disclosures a regulated adviser is required to carry into the structure rather than bolting them to the end.</p></div>
+        <div class="why"><span class="k">The decision</span><div><p class="decision">Make four decades of continuity the story, not a footnote.</p><p>Tenure reads as unremarkable until you set it against an industry where advisers move every few years. The disclosures a regulated adviser has to carry are built into the structure rather than bolted to the end.</p></div></div>
       </article>
 
     </main>
@@ -635,7 +639,7 @@ footer{ border-top:1px solid var(--rule); padding:26px 0 64px; display:flex; fle
     </section>
 
     <footer class="label">
-      <span>Rana Tahir Bilal &middot; Personal brand websites &amp; digital authority</span>
+      <span>Rana Tahir Bilal &middot; Digital identity &amp; authority</span>
       <span>Direct access</span>
     </footer>
 
